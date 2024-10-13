@@ -5,7 +5,10 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%; /* Asegurarse de que html y body ocupen el 100% de la altura de la ventana */
+    margin: 0;
+    padding: 0;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     background-color: #f4f4f4;
@@ -54,6 +57,7 @@ nav ul li a {
 
 /* Contenido del blog */
 main {
+    min-height: calc(100vh - 120px); /* Altura mínima para asegurar que el footer quede pegado al final */
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
@@ -72,7 +76,10 @@ footer {
     color: white;
     text-align: center;
     padding: 1rem;
-    margin-top: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
 }
 
 /* Estilos responsivos */
@@ -98,4 +105,14 @@ footer {
     nav ul li {
         margin: 20px 0;
     }
+}
+
+/* Estilos para la imagen en la parte superior derecha */
+.imagen-superior-derecha {
+    position: absolute;
+    top: 20px; /* Ajusta según el espacio que necesites desde el borde superior */
+    right: 20px; /* Ajusta según el espacio que necesites desde el borde derecho */
+    width: 150px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
 }
