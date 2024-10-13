@@ -1,32 +1,41 @@
-/* Estilos generales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%; /* Asegurarse de que html y body ocupen el 100% de la altura de la ventana */
-    margin: 0;
-    padding: 0;
+/* Estilos generales con fondo degradado neón */
+body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2, #4a00e0); /* Fondo neón degradado */
+    background-size: 400% 400%; /* Hacer que el degradado sea más dinámico */
+    animation: gradient 15s ease infinite;
+    color: #fff; /* Texto en blanco para contraste */
 }
 
-/* Barra de navegación */
+/* Animación del fondo */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Estilos de la barra de navegación */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo transparente para resaltar el degradado */
     padding: 1rem;
+    position: relative;
 }
 
 nav .logo {
-    color: #fff;
-    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+nav .logo img {
+    width: 100%; /* Ajusta el tamaño de tu logo */
+    height: auto;
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
 }
 
 nav ul {
@@ -41,8 +50,15 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
+nav ul li a:hover {
+    color: #4a00e0; /* Efecto hover en neón */
+}
+
+/* Estilos del menú hamburguesa */
 .burger {
     display: none;
     cursor: pointer;
@@ -53,36 +69,23 @@ nav ul li a {
     height: 3px;
     background-color: #fff;
     margin: 5px;
+    transition: all 0.3s ease;
 }
 
-/* Contenido del blog */
-main {
-    min-height: calc(100vh - 120px); /* Altura mínima para asegurar que el footer quede pegado al final */
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Transición de las líneas del menú hamburguesa */
+.burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
 
-h1, h2 {
-    color: #333;
+.burger.toggle .line2 {
+    opacity: 0;
 }
 
-/* Pie de página */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto;
+.burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Estilos responsivos */
+/* Estilos para dispositivos móviles */
 @media screen and (max-width: 768px) {
     nav ul {
         display: none;
@@ -95,24 +98,79 @@ footer {
     nav ul.nav-active {
         display: block;
         position: absolute;
-        background-color: #333;
         top: 60px;
-        width: 100%;
         left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
         text-align: center;
     }
 
     nav ul li {
         margin: 20px 0;
     }
+
+    nav ul li a {
+        font-size: 1.5rem;
+    }
 }
 
-/* Estilos para la imagen en la parte superior derecha */
-.imagen-superior-derecha {
-    position: absolute;
-    top: 20px; /* Ajusta según el espacio que necesites desde el borde superior */
-    right: 20px; /* Ajusta según el espacio que necesites desde el borde derecho */
-    width: 150px; /* Ajusta el tamaño de la imagen */
-    height: auto; /* Mantiene la proporción de la imagen */
-    z-index: 1000; /* Asegura que esté encima de otros elementos */
+/* Estilos generales con fondo degradado neón */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2, #4a00e0); /* Fondo neón degradado */
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: #fff;
+}
+
+/* Animación del fondo */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Estilo de la tarjeta principal */
+main {
+    max-width: 900px;
+    margin: 40px auto; /* Centra la tarjeta horizontalmente y da espacio vertical */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra suave */
+    backdrop-filter: blur(10px); /* Añade desenfoque detrás de la tarjeta */
+    color: #fff;
+}
+
+/* Títulos y textos dentro de la tarjeta */
+h1, h2 {
+    color: #fff;
+}
+
+p {
+    color: #ddd;
+}
+
+/* Pie de página */
+footer {
+    background-color: #173494;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Estilos para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    main {
+        max-width: 95%; /* Ajusta el tamaño de la tarjeta en pantallas pequeñas */
+        margin: 20px auto;
+        padding: 15px;
+    }
 }
