@@ -1,101 +1,139 @@
-/* Variables CSS para colores */
-:root {
-    --color-fondo: linear-gradient(135deg, #4a00e0, #8e2de2, #4a00e0);
-    --color-texto: #fff;
-    --color-nav-fondo: rgba(0, 0, 0, 0.8);
-    --color-nav-hover: #4a00e0;
-    --color-card-fondo: #ffffff;
-    --color-titulos: #333;
-    --color-texto-secundario: #666;
-    --color-footer-fondo: rgba(0, 0, 0, 0.8);
-    --color-footer-texto: #fff;
-}
-
-/* Reset de márgenes y alturas */
-html, body {
-    height: 100%;
+/* Reset y Box-sizing global */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Estilos generales */
+/* Variables CSS */
+:root {
+    --fondo-principal:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('images/background.jpg') no-repeat center center fixed;
+    --color-texto: #fff;
+    --color-nav-fondo: rgba(0, 0, 0, 0.7);
+    --color-nav-hover: #4a00e0;
+    --color-card-fondo: rgba(255, 255, 255, 0.9);
+    --color-titulos: #333;
+    --color-texto-secundario: #666;
+    --color-footer-fondo: rgba(0, 0, 0, 0.7);
+    --color-footer-texto: #fff;
+    --nav-height: 15%;
+    /* Ajusta este valor si es necesario */
+}
+
+/* Estilos del body */
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background: var(--color-fondo);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+    margin: 0;
+    background: var(--fondo-principal);
+    background-size: cover;
+    background-attachment: fixed;
     color: var(--color-texto);
+}
+
+/* Contenedor principal */
+.wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Animación del fondo degradado */
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    min-height: 100vh;
+ 
+    
+    /* Altura mínima de la ventana */
 }
 
 /* Navegación */
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: var(--color-nav-fondo);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--color-nav-fondo);
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    animation: gradient 15s ease infinite;
-    position: relative;
-    z-index: 10;
+    padding: 0 20px;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+
+    display: flex;
+    align-items: center;
+    /* Centra verticalmente los elementos */
+    justify-content: space-between;
+  
 }
 
+nav h1 {
+    flex: 1;
+    /* Permite que el h1 ocupe el espacio restante */
+    text-align: center;
+    /* Centra el texto dentro del h1 */
+    margin: 0;
+    /* Elimina márgenes por defecto */
+    font-size: 3rem;
+    /* Ajusta el tamaño de fuente según tus preferencias */
+    /* ...propiedades anteriores... */
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    /* Degradado de colores neón */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    /* Para compatibilidad con otros navegadores */
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+
+/* Contenedor del logo */
 nav .logo {
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
+/* Imagen del logo */
 nav .logo img {
-    width: 150px; /* Tamaño fijo del logo */
+    max-height: 100%;
+    width: auto;
     height: auto;
-    margin-right: 10px;
-    animation: girar3D 20s linear infinite;
-    transform-style: preserve-3d;
     border: 3px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    animation: girar3D 20s linear infinite;
+    object-fit: contain;
 }
 
+/* Animación del logo */
 @keyframes girar3D {
     from {
         transform: rotateY(0deg);
     }
+
     to {
         transform: rotateY(360deg);
     }
 }
 
-nav ul {
+/* Enlaces de navegación */
+nav ul.nav-links {
+    list-style: none;
     display: flex;
-    list-style: none; /* Elimina viñetas de la navegación */
-    margin: 0;
-    padding: 0;
 }
 
-nav ul li {
+nav ul.nav-links li {
     margin-left: 20px;
 }
 
-nav ul li a {
+nav ul.nav-links li a {
     color: var(--color-texto);
     text-decoration: none;
     font-size: 1.2rem;
     transition: color 0.3s;
 }
 
-nav ul li a:hover {
+nav ul.nav-links li a:hover {
     color: var(--color-nav-hover);
 }
 
@@ -103,8 +141,6 @@ nav ul li a:hover {
 .burger {
     display: none;
     cursor: pointer;
-    position: relative; /* Permite z-index */
-    z-index: 30; /* Mayor que el menú desplegable */
 }
 
 .burger div {
@@ -115,6 +151,7 @@ nav ul li a:hover {
     transition: all 0.3s ease;
 }
 
+/* Transformación del menú hamburguesa */
 .burger.toggle .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -127,88 +164,161 @@ nav ul li a:hover {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Tarjeta principal */
 main {
-    flex-grow: 1;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
+    flex: 1;
+    /* Toma el espacio disponible */
+    max-width: 700px;
+    width: 100%;
+    margin:  150px auto;  /* Aumenta el margen superior */
+    padding-top: 50px !important;
+    padding: 40px;
     background-color: var(--color-card-fondo);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    z-index: 1;
+    color: var(--color-texto-secundario);
     position: relative;
 }
 
+
+/* Títulos y textos */
+
 h1, h2 {
-    color: var(--color-titulos);
+    margin: 5px 0; /* Reduce el margen superior e inferior */
 }
 
-p {
-    color: var(--color-texto-secundario);
+p, ul {
+    margin: 5px 0; /* Ajusta el margen de los párrafos y listas */
 }
+
 
 /* Pie de página */
 footer {
-    background-color: var(--color-footer-fondo);
+    background: var(--color-footer-fondo);
     text-align: center;
-    padding: 1rem;
-    width: 100%;
-    margin-top: auto;
-    box-sizing: border-box;
-}
-
-footer p, footer a {
+    padding: 20px;
     color: var(--color-footer-texto);
+    /* El footer está en el flujo normal del documento */
+}
+
+/* Enlaces de navegación */
+nav ul.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul.nav-links li {
+    margin-left: 20px;
+    padding: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+    /* Brillo más intenso */
+
+}
+
+nav ul.nav-links li a {
+    color: var(--color-texto);
     text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s;
 }
 
-/* Estilos para listas desordenadas en la sección .post */
-.post ul {
-    list-style-type: disc; /* Viñetas sólidas */
-    padding-left: 20px; /* Espaciado a la izquierda */
-    color: var(--color-texto-secundario); /* #666 */
+/* Efecto hover */
+nav ul.nav-links li:hover {
+    background-color: #fff;
+    /* Fondo blanco al pasar el cursor */
+    border-color: #4a00e0;
+    /* Borde morado */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    /* Brillo blanco */
 }
 
-.post ul li {
-    margin-bottom: 10px; /* Espaciado entre elementos */
-    color: var(--color-texto-secundario); /* #666 */
+nav ul.nav-links li:hover a {
+    background: linear-gradient(45deg, #800080, #e000e0);
+    /* Degradado morado */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Para navegadores que soportan la versión sin prefijo */
+    text-fill-color: transparent;
 }
 
 /* Responsividad */
 @media screen and (max-width: 768px) {
+
+    /* Recalcular la altura del nav en dispositivos móviles */
+    :root {
+        --nav-height: 100px;
+        /* Reemplaza 100px por la altura real del header en móvil */
+    }
+
+    /* Mostrar el menú hamburguesa en pantallas pequeñas */
     .burger {
         display: block;
     }
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    nav ul.nav-active {
-        display: flex;
+    /* Ajustes para el menú de navegación */
+    nav ul.nav-links {
         position: absolute;
-        top: 60px;
+        top: var(--nav-height);
         left: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        text-align: center;
-        z-index: 20; /* Asegura que el menú desplegado quede encima de la tarjeta */
+        right: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--color-nav-fondo);
+        overflow: hidden;
+        transition: max-height 0.3s ease-in;
+        max-height: 0;
+        box-sizing: border-box;
+        padding: 0 10px;
     }
 
-    nav ul li {
-        margin: 20px 0;
+    /* Mostrar el menú cuando está activo */
+    nav ul.nav-links.nav-active {
+        max-height: 100vh;
     }
 
-    nav ul li a {
-        font-size: 1.5rem;
-    }
-
-    main {
-        max-width: 95%;
-        margin: 20px auto;
+    /* Ajustes de los elementos de la lista de navegación */
+    nav ul.nav-links li {
+        margin: 10px 0;
+        width: 100%;
         padding: 15px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* Ajustes de los enlaces */
+    nav ul.nav-links li a {
+        font-size: 1.5rem;
+        display: block;
+        width: 100%;
+        text-decoration: none;
+    }
+
+    /* Efectos hover */
+    nav ul.nav-links li:hover {
+        background-color: #fff;
+        border-color: #4a00e0;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+
+    nav ul.nav-links li:hover a {
+        background: linear-gradient(45deg, #800080, #e000e0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    /* Ajustes del main para dispositivos móviles */
+    main {
+        max-width: 90%;
+        margin: 120px auto;
+        padding: 10px 15px 15px;
+        padding-top: calc(var(--nav-height) + 20px);
+        position: relative;
     }
 }
