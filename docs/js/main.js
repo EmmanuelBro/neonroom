@@ -66,7 +66,7 @@ function music() {
         });
         
         // Reproducir la música automáticamente cuando la página se cargue
-        audio.play();
+        //audio.play();
     } else {
         console.error('El botón o el icono de la música no se encontraron en el DOM');
     }
