@@ -9,7 +9,7 @@
 :root {
     --fondo-principal:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('images/background.jpg') no-repeat center center fixed;
+        url('../images/background.jpg') no-repeat center center fixed;
     --color-texto: #fff;
     --color-nav-fondo: rgba(0, 0, 0, 0.7);
     --color-nav-hover: #4a00e0;
@@ -55,12 +55,11 @@ nav {
     padding: 0 20px;
     z-index: 1000;
     backdrop-filter: blur(5px);
-
     display: flex;
     align-items: center;
     /* Centra verticalmente los elementos */
     justify-content: space-between;
-  
+
 }
 
 nav h1 {
@@ -70,7 +69,7 @@ nav h1 {
     /* Centra el texto dentro del h1 */
     margin: 0;
     /* Elimina márgenes por defecto */
-    font-size: 3rem;
+    font-size: 2.5rem;
     /* Ajusta el tamaño de fuente según tus preferencias */
     /* ...propiedades anteriores... */
     background: linear-gradient(90deg, #00ffff, #ff00ff);
@@ -169,8 +168,10 @@ main {
     /* Toma el espacio disponible */
     max-width: 700px;
     width: 100%;
-    margin:  150px auto;  /* Aumenta el margen superior */
-    padding-top: 50px !important;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 40px;
     background-color: var(--color-card-fondo);
     border-radius: 15px;
@@ -317,8 +318,166 @@ nav ul.nav-links li:hover a {
     main {
         max-width: 90%;
         margin: 120px auto;
-        padding: 10px 15px 15px;
-        padding-top: calc(var(--nav-height) + 20px);
+        padding: auto;
         position: relative;
     }
+}
+
+/* Banner Superior */
+.banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+/* Página inicio / index.html */
+
+/* Contenedor de Tarjetas */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px auto;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* Estilos de las Tarjetas */
+.card {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    width: calc(50% - 40px); /* Cambiado de 33.333% a 50% */
+    max-width: 500px; /* Aumentado de 300px a 500px */
+    min-width: 250px;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    border: 2px solid rgba(0, 255, 255, 0.5); /* Añadido borde neón */
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
+    border-color: rgba(255, 0, 255, 0.7); /* Cambia el color del borde al hacer hover */
+}
+
+.card img {
+    width: 100%;
+    height: auto; /* Cambiado de altura fija a automática */
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    color: #fff;
+    text-align: left; /* Cambiado a izquierda para mejor legibilidad */
+}
+
+.card-content h2 {
+    font-size: 2rem; /* Aumentado para destacar el título */
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #ccc;
+    margin: 10px 0; /* Añadido margen para separación */
+}
+
+.card-content ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.card-content ul li {
+    margin-bottom: 5px;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+/* Responsividad */
+@media screen and (max-width: 1024px) {
+    .card {
+        width: calc(50% - 40px); /* Mantiene dos tarjetas por fila */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+        max-width: none;
+    }
+
+    .cards-container {
+        padding: 0 10px;
+    }
+
+    .card-content h2 {
+        font-size: 1.8rem; /* Ajuste de tamaño para móviles */
+    }
+
+    .card-content p,
+    .card-content ul li {
+        font-size: 0.9rem; /* Ajuste de tamaño para móviles */
+    }
+}
+
+/* Estilos para el <main> en index.html */
+.home-main {
+    flex: 1;
+    width: 100%;
+    margin: 150px auto;
+    background-color: transparent; /* Elimina el fondo blanco */
+    color: var(--color-texto); /* Asegura que el texto sea visible sobre el fondo */
+    position: relative;
+
+}
+
+/* Banner Superior */
+.banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 15px; /* Esquinas redondeadas */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Efecto neón */
+    margin: 20px auto; /* Espacio vertical alrededor del banner */
+    max-width: 1200px; /* Limita el ancho máximo */
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 15px; /* Esquinas redondeadas */
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    z-index: -1;
+    filter: blur(10px);
+}
+
+/* Scroll Suave */
+html {
+    scroll-behavior: smooth;
 }
