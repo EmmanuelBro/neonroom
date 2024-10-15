@@ -19,7 +19,7 @@ function loadHTML(elementId, url, callback) {
 }
 
 // Cargar el encabezado y el pie de página
-loadHTML('header', 'header.html', function() {
+loadHTML('header', 'header.html', function () {
     // Aquí colocamos el código que depende del encabezado
     initHeaderScripts();
 });
@@ -36,14 +36,38 @@ function initHeaderScripts() {
         navLinks.classList.toggle('nav-active');
         burger.classList.toggle('toggle');
     });
+
+    music();
 }
 
 
-// Agregar evento de clic en dispositivos táctiles
-const flipCards = document.querySelectorAll('.card');
+function music() {
+    // Código para alternar la imagen de la bocina
+    const musicToggleButton = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    const audio = document.getElementById('background-music');  // Obtener el elemento de audio
+    let isMuted = false;
 
-flipCards.forEach(card => {
-    card.addEventListener('click', function() {
-        this.querySelector('.card-inner').classList.toggle('is-flipped');
-    });
-});
+    if (musicToggleButton && musicIcon && audio) {
+        musicToggleButton.addEventListener('click', function () {
+            // Obtener solo el nombre de archivo de la imagen actual (sin ruta)
+            const currentSrc = musicIcon.src.split('/').pop();
+
+            // Cambiar entre las imágenes y alternar el mute
+            if (currentSrc === 'volume.png') {
+                musicIcon.src = 'images/volume_mute.png';
+                audio.pause();  // Pausar la música
+                isMuted = true;
+            } else {
+                musicIcon.src = 'images/volume.png';
+                audio.play();   // Reproducir la música
+                isMuted = false;
+            }
+        });
+        
+        // Reproducir la música automáticamente cuando la página se cargue
+        audio.play();
+    } else {
+        console.error('El botón o el icono de la música no se encontraron en el DOM');
+    }
+}
