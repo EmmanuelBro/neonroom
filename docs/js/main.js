@@ -1,73 +1,164 @@
-// main.js
+document.addEventListener('DOMContentLoaded', () => {
+    const headerContainer = document.getElementById('header');
+    const footerContainer = document.getElementById('footer');
+    const contentContainer = document.getElementById('content');
 
-// Función para cargar un archivo HTML en un elemento y ejecutar un callback después
-function loadHTML(elementId, url, callback) {
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al cargar ' + url);
-            }
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById(elementId).innerHTML = data;
-            if (callback) callback();
-        })
-        .catch(error => {
-            console.error('Hubo un problema con la solicitud Fetch:', error);
-        });
-}
-
-// Cargar el encabezado y el pie de página
-loadHTML('header', 'header.html', function () {
-    // Aquí colocamos el código que depende del encabezado
-    initHeaderScripts();
-});
-
-loadHTML('footer', 'footer.html');
-
-// Función que contiene los scripts que dependen del encabezado
-function initHeaderScripts() {
-    // Código del menú hamburguesa
-    const burger = document.querySelector('.burger');
-    const navLinks = document.querySelector('.nav-links');
-
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        burger.classList.toggle('toggle');
+    // Cargar encabezado y pie de página
+    Promise.all([
+        loadHTML('header', 'header.html'),
+        loadHTML('footer', 'footer.html')
+    ]).then(() => {
+        initHeaderScripts();
+        // Cargar la sección inicial basada en el hash
+        loadInitialSection();
+    }).catch(error => {
+        console.error('Error al cargar el encabezado o el pie de página:', error);
     });
 
-    music();
-}
-
-
-function music() {
-    // Código para alternar la imagen de la bocina
-    const musicToggleButton = document.getElementById('music-toggle');
-    const musicIcon = document.getElementById('music-icon');
-    const audio = document.getElementById('background-music');  // Obtener el elemento de audio
-    let isMuted = false;
-
-    if (musicToggleButton && musicIcon && audio) {
-        musicToggleButton.addEventListener('click', function () {
-            // Obtener solo el nombre de archivo de la imagen actual (sin ruta)
-            const currentSrc = musicIcon.src.split('/').pop();
-
-            // Cambiar entre las imágenes y alternar el mute
-            if (currentSrc === 'volume.png') {
-                musicIcon.src = 'images/volume_mute.png';
-                audio.pause();  // Pausar la música
-                isMuted = true;
-            } else {
-                musicIcon.src = 'images/volume.png';
-                audio.play();   // Reproducir la música
-                isMuted = false;
-            }
-        });
-        
-        // Reproducir la música automáticamente cuando la página se cargue
-        //audio.play();
-    } else {
-        console.error('El botón o el icono de la música no se encontraron en el DOM');
+    // Función para cargar HTML en un contenedor
+    function loadHTML(elementId, url) {
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar ' + url);
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById(elementId).innerHTML = data;
+            });
     }
-}
+
+    // Inicializar scripts después de cargar el encabezado
+    function initHeaderScripts() {
+        // Manejar el menú hamburguesa
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (burger && navLinks) {
+            burger.addEventListener('click', () => {
+                navLinks.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        }
+
+        // Inicializar música
+        initMusic();
+
+        // Manejar la navegación
+        const navLinksElements = document.querySelectorAll('.nav-link');
+        navLinksElements.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const hash = e.target.getAttribute('href');
+                navigateTo(hash);
+            });
+        });
+
+        // Manejar eventos de historial
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash || '#home';
+            loadSection(hash);
+        });
+    }
+
+    // Función para manejar la navegación
+    function navigateTo(hash) {
+        // Actualizar el historial sin recargar la página
+        history.pushState(null, null, hash);
+        loadSection(hash);
+    }
+
+    // Función para cargar una sección específica
+    function loadSection(hash) {
+        // Mapea hashes a archivos HTML
+        const routes = {
+            '#home': 'home.html',
+            '#rules': 'rules.html',
+            '#contact': 'contact.html'
+        };
+    
+        const page = routes[hash] || 'home.html';
+    
+        fetch(page)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al cargar ' + page);
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('content').innerHTML = data;
+    
+                // Selecciona el main correctamente
+                const mainElement = document.querySelector('main');
+                if (!mainElement) {
+                    console.error('No se encontró el elemento main');
+                    return;
+                }
+    
+                // Si estamos en home, añadimos la clase .transparent
+                if (hash === '#home' || hash === '') {
+                    mainElement.classList.add('transparent');
+                } else {
+                    // Para las otras páginas, quitamos la clase .transparent
+                    mainElement.classList.remove('transparent');
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar la sección:', error);
+            });
+    }
+
+    // Función para cargar la sección inicial basada en el hash
+    function loadInitialSection() {
+        const hash = window.location.hash || '#home';
+        loadSection(hash);
+    }
+
+    // Función para inicializar la música
+    function initMusic() {
+        const musicToggleButton = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const audio = document.getElementById('background-music');
+        let isMuted = JSON.parse(localStorage.getItem('isMuted')) || false;
+
+        // Configurar el estado inicial
+        if (isMuted) {
+            musicIcon.src = 'images/volume_mute.png';
+            audio.pause();
+        } else {
+            musicIcon.src = 'images/volume.png';
+            audio.play().catch(error => {
+                console.log('Autoplay bloqueado:', error);
+            });
+        }
+
+        if (musicToggleButton && musicIcon && audio) {
+            musicToggleButton.addEventListener('click', function () {
+                if (isMuted) {
+                    musicIcon.src = 'images/volume.png';
+                    audio.play();
+                    isMuted = false;
+                } else {
+                    musicIcon.src = 'images/volume_mute.png';
+                    audio.pause();
+                    isMuted = true;
+                }
+                localStorage.setItem('isMuted', JSON.stringify(isMuted));
+            });
+        } else {
+            console.error('El botón o el icono de la música no se encontraron en el DOM');
+        }
+    }
+});
+
+// Llamar a loadSection según el hash actual al cargar la página
+window.addEventListener('hashchange', () => {
+    loadSection(window.location.hash);
+});
+
+// Cargar la sección inicial al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    loadSection(window.location.hash || '#home');
+});

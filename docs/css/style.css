@@ -164,6 +164,9 @@ nav ul.nav-links li a:hover {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
+
+
+/* Estilo general del main */
 main {
     flex: 1;
     /* Toma el espacio disponible */
@@ -181,6 +184,15 @@ main {
     position: relative;
 }
 
+/* Estilo transparente para el main */
+main.transparent {
+    flex: 1;
+    width: 100%;
+    margin: 150px auto;
+    background-color: transparent; /* Elimina el fondo blanco */
+    color: var(--color-texto); /* Asegura que el texto sea visible sobre el fondo */
+    position: relative;
+}
 
 /* Títulos y textos */
 
@@ -546,4 +558,8 @@ html {
 .music-button{
     padding: 0px;
     border-radius: 100px;
+}
+
+.music-leyend{
+    margin-top: -100px;
 }
