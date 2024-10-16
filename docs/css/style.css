@@ -560,6 +560,34 @@ html {
     border-radius: 100px;
 }
 
-.music-leyend{
-    margin-top: -100px;
+/* Contenedor para la bocina y la leyenda */
+.music-container {
+    display: flex;
+    align-items: center;  /* Centrar verticalmente */
+    gap: 10px;  /* Espacio entre el botón y la leyenda */
+}
+
+/* Ajustes para el botón de música */
+.music-button {
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Ajustes para la leyenda */
+.music-leyend {
+    font-size: 1.5rem;  /* Ajusta el tamaño de fuente si es necesario */
+    color: #fff;  /* Puedes cambiar el color según tu diseño */
+}
+
+/* Responsividad: en pantallas pequeñas, coloca el texto debajo del botón */
+@media screen and (max-width: 768px) {
+    .music-container {
+        flex-direction: column;  /* Cambia a columna en pantallas pequeñas */
+        align-items: center;  /* Centrar horizontalmente */
+    }
+    
+    .music-leyend {
+        margin-top: 10px;  /* Agrega espacio entre el botón y el texto en pantallas pequeñas */
+    }
 }

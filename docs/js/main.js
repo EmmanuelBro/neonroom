@@ -34,19 +34,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // Manejar el menú hamburguesa
         const burger = document.querySelector('.burger');
         const navLinks = document.querySelector('.nav-links');
-
+        const navLinksElements = document.querySelectorAll('.nav-link');  // Selecciona todos los enlaces del menú
+    
         if (burger && navLinks) {
+            // Alternar el menú hamburguesa abierto/cerrado
             burger.addEventListener('click', () => {
                 navLinks.classList.toggle('nav-active');
                 burger.classList.toggle('toggle');
             });
+    
+            // Cerrar el menú cuando se haga clic en cualquier enlace
+            navLinksElements.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('nav-active');  // Cerrar el menú
+                    burger.classList.remove('toggle');  // Revertir la animación de la hamburguesa
+                });
+            });
         }
-
+    
         // Inicializar música
         initMusic();
-
+    
         // Manejar la navegación
-        const navLinksElements = document.querySelectorAll('.nav-link');
         navLinksElements.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -54,13 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 navigateTo(hash);
             });
         });
-
+    
         // Manejar eventos de historial
         window.addEventListener('popstate', () => {
             const hash = window.location.hash || '#home';
             loadSection(hash);
         });
     }
+    
 
     // Función para manejar la navegación
     function navigateTo(hash) {
@@ -121,19 +131,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const musicToggleButton = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const audio = document.getElementById('background-music');
-        let isMuted = JSON.parse(localStorage.getItem('isMuted')) || false;
-
+        let isMuted = JSON.parse(localStorage.getItem('isMuted')) || true;  // Iniciar como mute por defecto
+    
         // Configurar el estado inicial
         if (isMuted) {
-            musicIcon.src = 'images/volume_mute.png';
-            audio.pause();
+            musicIcon.src = 'images/volume_mute.png';  // Icono de mute por defecto
+            audio.pause();  // Asegurar que la música no se esté reproduciendo al principio
         } else {
             musicIcon.src = 'images/volume.png';
             audio.play().catch(error => {
                 console.log('Autoplay bloqueado:', error);
             });
         }
-
+    
         if (musicToggleButton && musicIcon && audio) {
             musicToggleButton.addEventListener('click', function () {
                 if (isMuted) {
@@ -145,20 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     audio.pause();
                     isMuted = true;
                 }
-                localStorage.setItem('isMuted', JSON.stringify(isMuted));
+                localStorage.setItem('isMuted', JSON.stringify(isMuted));  // Guardar el estado en localStorage
             });
         } else {
             console.error('El botón o el icono de la música no se encontraron en el DOM');
         }
     }
-});
+    
+    // Llamar a loadSection según el hash actual al cargar la página
+    window.addEventListener('hashchange', () => {
+        loadSection(window.location.hash);
+    });
 
-// Llamar a loadSection según el hash actual al cargar la página
-window.addEventListener('hashchange', () => {
-    loadSection(window.location.hash);
-});
-
-// Cargar la sección inicial al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    loadSection(window.location.hash || '#home');
+    // Cargar la sección inicial al cargar la página
+    loadInitialSection();
 });
