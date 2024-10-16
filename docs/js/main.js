@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const burger = document.querySelector('.burger');
         const navLinks = document.querySelector('.nav-links');
         const navLinksElements = document.querySelectorAll('.nav-link');  // Selecciona todos los enlaces del menú
-    
+        const musicToggleButton = document.getElementById('music-toggle'); // Botón de la bocina
+        
         if (burger && navLinks) {
             // Alternar el menú hamburguesa abierto/cerrado
             burger.addEventListener('click', () => {
@@ -50,6 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     burger.classList.remove('toggle');  // Revertir la animación de la hamburguesa
                 });
             });
+    
+            // Cerrar el menú cuando se haga clic en el botón de la bocina
+            if (musicToggleButton) {
+                musicToggleButton.addEventListener('click', () => {
+                    navLinks.classList.remove('nav-active');  // Cerrar el menú
+                    burger.classList.remove('toggle');  // Revertir la animación de la hamburguesa
+                });
+            }
         }
     
         // Inicializar música
@@ -131,14 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const musicToggleButton = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
         const audio = document.getElementById('background-music');
+        const musicLeyend = document.querySelector('.music-leyend');  // Referencia a la leyenda
         let isMuted = JSON.parse(localStorage.getItem('isMuted')) || true;  // Iniciar como mute por defecto
     
         // Configurar el estado inicial
         if (isMuted) {
             musicIcon.src = 'images/volume_mute.png';  // Icono de mute por defecto
+            musicLeyend.textContent = '¡Dale play para animar el ambiente! 🎶🌃🎶';  // Texto para cuando está muteado
             audio.pause();  // Asegurar que la música no se esté reproduciendo al principio
         } else {
             musicIcon.src = 'images/volume.png';
+            musicLeyend.textContent = '¿Demasiado fuerte? Haz clic para mutear. 🙉';  // Texto para cuando está reproduciendo
             audio.play().catch(error => {
                 console.log('Autoplay bloqueado:', error);
             });
@@ -148,10 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
             musicToggleButton.addEventListener('click', function () {
                 if (isMuted) {
                     musicIcon.src = 'images/volume.png';
+                    musicLeyend.textContent = '¿Demasiado fuerte? Haz clic para mutear. 🙉';  // Actualizar leyenda al reproducir
                     audio.play();
                     isMuted = false;
                 } else {
                     musicIcon.src = 'images/volume_mute.png';
+                    musicLeyend.textContent = '¡Dale play para animar el ambiente! 🎶🌃🎶';  // Actualizar leyenda al mutear
                     audio.pause();
                     isMuted = true;
                 }
@@ -161,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('El botón o el icono de la música no se encontraron en el DOM');
         }
     }
+    
     
     // Llamar a loadSection según el hash actual al cargar la página
     window.addEventListener('hashchange', () => {
