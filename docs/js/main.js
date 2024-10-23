@@ -94,7 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const routes = {
             '#home': 'home.html',
             '#rules': 'rules.html',
-            '#contact': 'contact.html'
+            '#contact': 'contact.html',
+            '#memberships_information': 'memberships_information.html',
+            '#data_recolection_especification': 'data_recolection_especification.html'
         };
     
         const page = routes[hash] || 'home.html';
@@ -185,3 +187,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar la sección inicial al cargar la página
     loadInitialSection();
 });
+
+//TODO: Agregar un contador de visitas a la pagina XD
