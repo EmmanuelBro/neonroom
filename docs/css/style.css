@@ -627,8 +627,9 @@ body {
     border: 2px solid #2196F3; /* Color por defecto, se sobrescribirá */
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     display: flex;
+    flex-direction: column; /* Ajuste para responsividad */
     align-items: center;
-    position: relative; /* Para posicionar el resplandor */
+    position: relative;
 }
 
 /* Definir variables y efectos de resplandor para cada membresía */
@@ -641,8 +642,7 @@ body {
 .blue .icono-usuario::before,
 .blue .icono-usuario::after {
     background-color: var(--color-membresia); /* Azul */
-    box-shadow: 0 0 10px var(--color-membresia),
-                0 0 20px var(--color-membresia);
+    box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .purple {
@@ -654,8 +654,7 @@ body {
 .purple .icono-usuario::before,
 .purple .icono-usuario::after {
     background-color: var(--color-membresia); /* Púrpura */
-    box-shadow: 0 0 10px var(--color-membresia),
-                0 0 20px var(--color-membresia);
+    box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .indigo {
@@ -667,8 +666,7 @@ body {
 .indigo .icono-usuario::before,
 .indigo .icono-usuario::after {
     background-color: var(--color-membresia); /* Indigo */
-    box-shadow: 0 0 10px var(--color-membresia),
-                0 0 20px var(--color-membresia);
+    box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .neon {
@@ -680,8 +678,7 @@ body {
 .neon .icono-usuario::before,
 .neon .icono-usuario::after {
     background-color: var(--color-membresia); /* Rosa neón */
-    box-shadow: 0 0 10px var(--color-membresia),
-                0 0 20px var(--color-membresia);
+    box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .neon-light {
@@ -693,8 +690,7 @@ body {
 .neon-light .icono-usuario::before,
 .neon-light .icono-usuario::after {
     background-color: var(--color-membresia); /* Verde Neón */
-    box-shadow: 0 0 10px var(--color-membresia),
-                0 0 20px var(--color-membresia);
+    box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 /* Hover efectos */
@@ -708,8 +704,8 @@ body {
     width: 60px;
     height: 60px;
     position: relative;
-    flex-shrink: 0; /* Evita que el icono se reduzca */
-    margin-right: 20px; /* Espacio entre el icono y el texto */
+    flex-shrink: 0;
+    margin-bottom: 10px;
 }
 
 /* Cabeza */
@@ -738,28 +734,28 @@ body {
     transform: translateX(-50%);
 }
 
-/* Estilos para los brazos (Opcional) */
-.brazo-izq, .brazo-der {
-    width: 15px;
-    height: 40px;
-    background-color: inherit; /* Hereda el color del contenedor */
+/* Icono de Ahorro en forma de círculo */
+.ahorro {
     position: absolute;
-    top: 25px;
-}
-
-.brazo-izq {
-    left: -15px;
-    transform: rotate(-30deg);
-}
-
-.brazo-der {
-    right: -15px;
-    transform: rotate(30deg);
+    top: -10px;
+    right: -10px;
+    background-color: #e20b0b;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Forma de círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 /* Estilos para el contenido de la tarjeta */
 .contenido {
-    text-align: left;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -783,36 +779,39 @@ body {
     }
 
     .tarjeta {
-        width: 80%;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .contenido {
-        text-align: center;
+        width: 100%; /* Ancho completo en pantallas pequeñas */
+        max-width: 300px; /* Mantiene tamaño máximo */
+        padding: 15px;
+        margin-bottom: 10px;
     }
 
     .icono-usuario {
-        margin-right: 10px;
+        margin-right: 0; /* Ajuste para centrar el icono en la tarjeta */
+    }
+
+    .ahorro {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
     }
 }
 
-/* Icono de Ahorro en forma de estrella */
-/* Icono de Ahorro en forma de círculo */
-.ahorro {
+/* Estilos para los brazos (Opcional) */
+.brazo-izq, .brazo-der {
+    width: 15px;
+    height: 40px;
+    background-color: inherit; /* Hereda el color del contenedor */
     position: absolute;
-    top: -10px;
-    right: -25px;
-    background-color: #e20b0b; /* Rojo intenso para resaltar */
-    color: #fff;
-    font-size: 0.75em;
-    font-weight: bold;
-    width: 50px; /* Ancho fijo */
-    height: 40px; /* Alto igual al ancho para crear un círculo */
-    border-radius: 50%; /* Forma de círculo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
+    top: 25px;
+}
+
+.brazo-izq {
+    left: -15px;
+    transform: rotate(-30deg);
+}
+
+.brazo-der {
+    right: -15px;
+    transform: rotate(30deg);
 }
