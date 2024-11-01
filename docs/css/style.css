@@ -198,6 +198,11 @@ main.transparent {
 
 h1, h2 {
     margin: 5px 0; /* Reduce el margen superior e inferior */
+
+}
+
+h1, h3{
+    text-align: center;
 }
 
 p, ul {
@@ -602,7 +607,7 @@ body {
 }
 
 .post {
-    text-align: center;
+    
     padding: 50px 20px;
 }
 
