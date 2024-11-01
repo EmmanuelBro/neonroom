@@ -695,7 +695,7 @@ body {
 
 .neon-light .icono-usuario::before,
 .neon-light .icono-usuario::after {
-    background-color: var(--color-membresia); /* Verde Neón */
+    background-color: var(--color-membresia); /* gris Neón */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
