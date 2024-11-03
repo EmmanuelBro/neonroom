@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Configurar el estado inicial
         if (isMuted) {
             musicIcon.src = 'images/volume_mute.png';  // Icono de mute por defecto
-            musicLeyend.textContent = '¡Dale play para animar el ambiente! 🎶🌃🎶';  // Texto para cuando está muteado
+            musicLeyend.textContent = '¡Dale play a la bocina para animar el ambiente! 🎶🌃🎶';  // Texto para cuando está muteado
             audio.pause();  // Asegurar que la música no se esté reproduciendo al principio
         } else {
             musicIcon.src = 'images/volume.png';
