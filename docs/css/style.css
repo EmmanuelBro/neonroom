@@ -821,3 +821,30 @@ body {
     right: -15px;
     transform: rotate(30deg);
 }
+
+
+    /* Estilos para el elemento de lista con la clase 'premios' */
+    .premios {
+        text-align: center; /* Centra el contenido dentro del <li> */
+        margin-top: 20px; /* Espacio superior opcional */
+    }
+
+    .premios img {
+        max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
+        height: auto;    /* Mantiene la proporción de la imagen */
+        display: block;  /* Elimina espacios debajo de la imagen */
+        margin: 0 auto;  /* Centra la imagen horizontalmente */
+    }
+
+    .premios p {
+        margin-top: 10px;          /* Espacio entre la imagen y la leyenda */
+        font-weight: bold;         /* Texto en negrita para la leyenda */
+        font-size: 1em;            /* Tamaño de fuente adecuado */
+    }
+
+    /* Opcional: Ajustes para dispositivos móviles */
+    @media (max-width: 600px) {
+        .premios p {
+            font-size: 0.9em; /* Ajusta el tamaño de fuente en pantallas pequeñas */
+        }
+    }
