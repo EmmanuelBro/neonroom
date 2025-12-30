@@ -223,8 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
             photo: "images/fotos/hulk.jpg",
             stats: {
                 impetu: 60,
-                resistencia: 20,
-                velocidad: 95,
+                resistencia: 15,
+                velocidad: 80,
                 maxLevels: "22-23"
             }
         },
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stats: {
                 impetu: 65,
                 resistencia: 40,
-                velocidad: 85,
+                velocidad: 70,
                 maxLevels: "19-21"
             }
         },
@@ -246,9 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Excelente resistencia y energía, logra pasar algunos niveles 20, 21 y 22 con rango S.",
             photo: "images/fotos/emma.jpg",
             stats: {
-                impetu: 55,
-                resistencia: 90,
-                velocidad: 80,
+                impetu: 50,
+                resistencia: 85,
+                velocidad: 60,
                 maxLevels: "20-22"
             }
         },
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stats: {
                 impetu: 40,
                 resistencia: 70,
-                velocidad: 75,
+                velocidad: 55,
                 maxLevels: "20-22"
             }
         },
@@ -278,12 +278,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             level: 4,
-            title: "Fernando - El Ferna",
+            title: "Fernando - Ferna",
             desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
             photo: "images/fotos/fernando.jpg",
             stats: {
                 impetu: 55,
-                resistencia: 70,
+                resistencia: 50,
                 velocidad: 65,
                 maxLevels: "19-22"
             }
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             photo: "images/fotos/gustavo.jpg",
             stats: {
                 impetu: 45,
-                resistencia: 75,
+                resistencia: 70,
                 velocidad: 55,
                 maxLevels: "18-22"
             }
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Muy buena resistencia, logra conseguir scores S y doble SS en niveles 16 y 17.",
             photo: "images/fotos/gil.jpeg",
             stats: {
-                impetu: 65,
+                impetu: 60,
                 resistencia: 45,
                 velocidad: 40,
                 maxLevels: "16-19"
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Siempre se esfuerza al máximo! logrando scores S y SS en niveles intermedios.",
             photo: "images/fotos/yanet.jpg",
             stats: {
-                impetu: 80,
+                impetu: 70,
                 resistencia: 30,
                 velocidad: 35,
                 maxLevels: "15-18"
