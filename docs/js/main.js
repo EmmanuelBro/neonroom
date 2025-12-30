@@ -517,7 +517,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Wait display time (6s) then Fade out
+            // Custom timeout for specific banners
+            let displayTime = 6000;
+            if (index === 0) { // WhatsApp Banner
+                displayTime = 9000; // Increased to 9s
+            }
+
+            // Wait display time then Fade out
             setTimeout(() => {
                 const ctaElement = towerContainer.querySelector('.tower-cta');
                 if (ctaElement) {
@@ -536,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showBanner(index + 1);
                 }, 2000);
 
-            }, 6000); // 6s display time
+            }, displayTime);
         }
 
         // Start with first banner

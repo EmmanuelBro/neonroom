@@ -1839,9 +1839,9 @@ body.news-page .header-separator {
 /* Remove Grid Media Query, handle via card width */
 
 .drink-card {
-    /* Mobile: 3 per row (approx 33%) */
-    flex: 0 0 calc(33.33% - 10px);
-    max-width: calc(33.33% - 10px);
+    /* Mobile: 2 per row (approx 50%) - FIX for small screens */
+    flex: 0 0 calc(50% - 13px);
+    max-width: calc(50% - 13px);
 
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid #bd00ff;
