@@ -1,4 +1,4 @@
-/* Reset y Box-sizing global */
+﻿/* Reset y Box-sizing global */
 * {
     margin: 0;
     padding: 0;
@@ -18,8 +18,8 @@
     --color-texto-secundario: #666;
     --color-footer-fondo: rgba(0, 0, 0, 0.7);
     --color-footer-texto: #fff;
-    --nav-height: 15%;
-    /* Ajusta este valor si es necesario */
+    --nav-height: 100px;
+    /* Fixed height for global hamburger menu */
 }
 
 /* Estilos del body */
@@ -36,8 +36,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
- 
-    
+
+
     /* Altura mínima de la ventana */
 }
 
@@ -137,9 +137,9 @@ nav ul.nav-links li a:hover {
     color: var(--color-nav-hover);
 }
 
-/* Menú hamburguesa */
+/* Menú hamburguesa - Always Visible */
 .burger {
-    display: none;
+    display: block;
     cursor: pointer;
 }
 
@@ -165,23 +165,25 @@ nav ul.nav-links li a:hover {
 }
 
 
-
 /* Estilo general del main */
 main {
     flex: 1;
     /* Toma el espacio disponible */
-    max-width: 700px;
+    max-width: 65%;
+    /* Was 700px. Changed to 100% then to 70% per user request */
     width: 100%;
     margin-top: 150px;
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    padding: 40px;
+    padding: 20px;
+    /* Reduced from 40px to make container smaller */
     background-color: var(--color-card-fondo);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     color: var(--color-texto-secundario);
     position: relative;
+
 }
 
 /* Estilo transparente para el main */
@@ -189,24 +191,31 @@ main.transparent {
     flex: 1;
     width: 100%;
     margin: 150px auto;
-    background-color: transparent; /* Elimina el fondo blanco */
-    color: var(--color-texto); /* Asegura que el texto sea visible sobre el fondo */
+    background-color: transparent;
+    /* Elimina el fondo blanco */
+    color: var(--color-texto);
+    /* Asegura que el texto sea visible sobre el fondo */
     position: relative;
 }
 
 /* Títulos y textos */
 
-h1, h2 {
-    margin: 5px 0; /* Reduce el margen superior e inferior */
+h1,
+h2 {
+    margin: 5px 0;
+    /* Reduce el margen superior e inferior */
 
 }
 
-h1, h3{
+h1,
+h3 {
     text-align: center;
 }
 
-p, ul {
-    margin: 5px 0; /* Ajusta el margen de los párrafos y listas */
+p,
+ul {
+    margin: 5px 0;
+    /* Ajusta el margen de los párrafos y listas */
 }
 
 
@@ -219,124 +228,80 @@ footer {
     /* El footer está en el flujo normal del documento */
 }
 
-/* Enlaces de navegación */
+/* Enlaces de navegación - Global Mobile Style */
 nav ul.nav-links {
     list-style: none;
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 100px;
+    /* Fixed height match */
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    background: var(--color-nav-fondo);
+    overflow-y: auto;
+    transition: max-height 0.3s ease-in;
+    max-height: 0;
+    box-sizing: border-box;
+    padding: 0 10px;
 }
 
+/* Mostrar el menú cuando está activo */
+nav ul.nav-links.nav-active {
+    max-height: calc(100vh - 100px);
+}
+
+/* Ajustes de los elementos de la lista de navegación */
 nav ul.nav-links li {
-    margin-left: 20px;
-    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box;
     border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.1);
     transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
     box-shadow: 0 0 20px rgba(255, 255, 255, 1);
-    /* Brillo más intenso */
-
 }
 
+/* Ajustes de los enlaces */
 nav ul.nav-links li a {
     color: var(--color-texto);
+    font-size: 1.5rem !important;
+    /* Force consistent size */
+    display: block;
+    width: 100%;
     text-decoration: none;
-    font-size: 1.2rem;
     transition: color 0.3s;
 }
 
 /* Efecto hover */
 nav ul.nav-links li:hover {
     background-color: #fff;
-    /* Fondo blanco al pasar el cursor */
     border-color: #4a00e0;
-    /* Borde morado */
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    /* Brillo blanco */
 }
 
 nav ul.nav-links li:hover a {
     background: linear-gradient(45deg, #800080, #e000e0);
-    /* Degradado morado */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    /* Para navegadores que soportan la versión sin prefijo */
     text-fill-color: transparent;
 }
 
 /* Responsividad */
-@media screen and (max-width: 768px) {
-
-    /* Recalcular la altura del nav en dispositivos móviles */
-    :root {
-        --nav-height: 100px;
-        /* Reemplaza 100px por la altura real del header en móvil */
-    }
-
-    /* Mostrar el menú hamburguesa en pantallas pequeñas */
-    .burger {
-        display: block;
-    }
-
-    /* Ajustes para el menú de navegación */
-    nav ul.nav-links {
-        position: absolute;
-        top: var(--nav-height);
-        left: 0;
-        right: 0;
-        width: 100%;
-        flex-direction: column;
-        background: var(--color-nav-fondo);
-        overflow: hidden;
-        transition: max-height 0.3s ease-in;
-        max-height: 0;
-        box-sizing: border-box;
-        padding: 0 10px;
-    }
-
-    /* Mostrar el menú cuando está activo */
-    nav ul.nav-links.nav-active {
-        max-height: 100vh;
-    }
-
-    /* Ajustes de los elementos de la lista de navegación */
-    nav ul.nav-links li {
-        margin: 10px 0;
-        width: 100%;
-        padding: 15px;
-        text-align: center;
-        box-sizing: border-box;
-    }
-
-    /* Ajustes de los enlaces */
-    nav ul.nav-links li a {
-        font-size: 1.5rem;
-        display: block;
-        width: 100%;
-        text-decoration: none;
-    }
-
-    /* Efectos hover */
-    nav ul.nav-links li:hover {
-        background-color: #fff;
-        border-color: #4a00e0;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-    }
-
-    nav ul.nav-links li:hover a {
-        background: linear-gradient(45deg, #800080, #e000e0);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-    }
+@media screen and (max-width: 1435px) {
 
     /* Ajustes del main para dispositivos móviles */
     main {
         max-width: 90%;
         margin: 120px auto;
-        padding: auto;
+        padding: 15px;
+        /* Fixed invalid 'auto' padding */
         position: relative;
     }
 }
@@ -373,35 +338,42 @@ nav ul.nav-links li:hover a {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
     overflow: hidden;
-    width: calc(50% - 40px); /* Cambiado de 33.333% a 50% */
-    max-width: 500px; /* Aumentado de 300px a 500px */
+    width: calc(50% - 40px);
+    /* Cambiado de 33.333% a 50% */
+    max-width: 500px;
+    /* Aumentado de 300px a 500px */
     min-width: 250px;
     position: relative;
     transition: transform 0.3s, border-color 0.3s;
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-    border: 2px solid rgba(0, 255, 255, 0.5); /* Añadido borde neón */
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    /* Añadido borde neón */
 }
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 0 25px rgba(255, 0, 255, 0.7);
-    border-color: rgba(255, 0, 255, 0.7); /* Cambia el color del borde al hacer hover */
+    border-color: rgba(255, 0, 255, 0.7);
+    /* Cambia el color del borde al hacer hover */
 }
 
 .card img {
     width: 100%;
-    height: auto; /* Cambiado de altura fija a automática */
+    height: auto;
+    /* Cambiado de altura fija a automática */
     object-fit: cover;
 }
 
 .card-content {
     padding: 20px;
     color: #fff;
-    text-align: left; /* Cambiado a izquierda para mejor legibilidad */
+    text-align: left;
+    /* Cambiado a izquierda para mejor legibilidad */
 }
 
 .card-content h2 {
-    font-size: 2rem; /* Aumentado para destacar el título */
+    font-size: 2rem;
+    /* Aumentado para destacar el título */
     margin-bottom: 10px;
     background: linear-gradient(90deg, #00ffff, #ff00ff);
     -webkit-background-clip: text;
@@ -411,7 +383,8 @@ nav ul.nav-links li:hover a {
 .card-content p {
     font-size: 1rem;
     color: #ccc;
-    margin: 10px 0; /* Añadido margen para separación */
+    margin: 10px 0;
+    /* Añadido margen para separación */
 }
 
 .card-content ul {
@@ -428,13 +401,15 @@ nav ul.nav-links li:hover a {
 /* Responsividad */
 @media screen and (max-width: 1024px) {
     .card {
-        width: calc(50% - 40px); /* Mantiene dos tarjetas por fila */
+        width: calc(50% - 40px);
+        /* Mantiene dos tarjetas por fila */
     }
 }
 
 @media screen and (max-width: 768px) {
     .card {
-        width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+        width: 100%;
+        /* Una tarjeta por fila en pantallas pequeñas */
         max-width: none;
     }
 
@@ -443,12 +418,14 @@ nav ul.nav-links li:hover a {
     }
 
     .card-content h2 {
-        font-size: 1.8rem; /* Ajuste de tamaño para móviles */
+        font-size: 1.8rem;
+        /* Ajuste de tamaño para móviles */
     }
 
     .card-content p,
     .card-content ul li {
-        font-size: 0.9rem; /* Ajuste de tamaño para móviles */
+        font-size: 0.9rem;
+        /* Ajuste de tamaño para móviles */
     }
 }
 
@@ -457,8 +434,10 @@ nav ul.nav-links li:hover a {
     flex: 1;
     width: 100%;
     margin: 150px auto;
-    background-color: transparent; /* Elimina el fondo blanco */
-    color: var(--color-texto); /* Asegura que el texto sea visible sobre el fondo */
+    background-color: transparent;
+    /* Elimina el fondo blanco */
+    color: var(--color-texto);
+    /* Asegura que el texto sea visible sobre el fondo */
     position: relative;
 
 }
@@ -469,17 +448,22 @@ nav ul.nav-links li:hover a {
     width: 100%;
     height: auto;
     overflow: hidden;
-    border-radius: 15px; /* Esquinas redondeadas */
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Efecto neón */
-    margin: 20px auto; /* Espacio vertical alrededor del banner */
-    max-width: 1200px; /* Limita el ancho máximo */
+    border-radius: 15px;
+    /* Esquinas redondeadas */
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    /* Efecto neón */
+    margin: 20px auto;
+    /* Espacio vertical alrededor del banner */
+    max-width: 1200px;
+    /* Limita el ancho máximo */
 }
 
 .banner img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 15px; /* Esquinas redondeadas */
+    border-radius: 15px;
+    /* Esquinas redondeadas */
 }
 
 .banner::before {
@@ -505,34 +489,44 @@ html {
 /* Estilos para los íconos sociales */
 .social-icons {
     display: flex;
-    justify-content: center; /* Centra los íconos horizontalmente */
-    gap: 20px; /* Espacio entre los íconos */
-    margin-top: 20px; /* Espacio superior */
+    justify-content: center;
+    /* Centra los íconos horizontalmente */
+    gap: 20px;
+    /* Espacio entre los íconos */
+    margin-top: 20px;
+    /* Espacio superior */
 }
 
 .social-icon {
-    width: 100px; /* Ajusta el tamaño según tu preferencia */
+    width: 100px;
+    /* Ajusta el tamaño según tu preferencia */
     height: 100px;
-    border-radius: 50%; /* Hace que la imagen sea circular */
-    box-shadow: 0 0 10px rgba(162, 0, 255, 0.7), /* Sombra neón */
-                0 0 20px rgba(0, 102, 255, 0.5), 
-                0 0 30px rgba(38, 0, 255, 0.3);
+    border-radius: 50%;
+    /* Hace que la imagen sea circular */
+    box-shadow: 0 0 10px rgba(162, 0, 255, 0.7),
+        /* Sombra neón */
+        0 0 20px rgba(0, 102, 255, 0.5),
+        0 0 30px rgba(38, 0, 255, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre la imagen */
 }
 
 .social-icon:hover {
-    transform: scale(1.1); /* Efecto de aumento al pasar el cursor */
+    transform: scale(1.1);
+    /* Efecto de aumento al pasar el cursor */
     box-shadow: 0 0 15px rgba(0, 47, 255, 0.9),
-                0 0 25px rgba(234, 0, 255, 0.7),
-                0 0 35px rgba(0, 255, 255, 0.5);
+        0 0 25px rgba(234, 0, 255, 0.7),
+        0 0 35px rgba(0, 255, 255, 0.5);
 }
 
 /* Opcional: Ajustes para pantallas pequeñas */
 @media screen and (max-width: 768px) {
     .social-icons {
-        flex-direction: row; /* Coloca los íconos en una columna */
-        gap: 15px; /* Espacio entre los íconos */
+        flex-direction: row;
+        /* Coloca los íconos en una columna */
+        gap: 15px;
+        /* Espacio entre los íconos */
     }
 
     .social-icon {
@@ -545,7 +539,8 @@ html {
 .map-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+    padding-bottom: 56.25%;
+    /* Relación de aspecto 16:9 */
     height: 0;
     overflow: hidden;
     border-radius: 15px;
@@ -561,7 +556,7 @@ html {
     border-radius: 15px;
 }
 
-.music-button{
+.music-button {
     padding: 0px;
     border-radius: 100px;
 }
@@ -569,8 +564,14 @@ html {
 /* Contenedor para la bocina y la leyenda */
 .music-container {
     display: flex;
-    align-items: center;  /* Centrar verticalmente */
-    gap: 10px;  /* Espacio entre el botón y la leyenda */
+    align-items: center;
+    /* Centrar verticalmente */
+    gap: 10px;
+    /* Espacio entre el botón y la leyenda */
+    justify-content: center;
+    /* Center the group */
+    flex-direction: row-reverse;
+    /* Icon on Right, Text on Left */
 }
 
 /* Ajustes para el botón de música */
@@ -580,21 +581,33 @@ html {
     cursor: pointer;
 }
 
+#music-icon {
+    height: 1.5rem;
+    /* Match the visual size of the text emojis */
+    width: auto;
+    vertical-align: middle;
+}
+
 /* Ajustes para la leyenda */
 .music-leyend {
-    font-size: 1.5rem;  /* Ajusta el tamaño de fuente si es necesario */
-    color: #fff;  /* Puedes cambiar el color según tu diseño */
+    font-size: 1.2rem;
+    /* Ajusta el tamaño de fuente si es necesario */
+    color: #fff;
+    /* Puedes cambiar el color según tu diseño */
 }
 
 /* Responsividad: en pantallas pequeñas, coloca el texto debajo del botón */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1435px) {
     .music-container {
-        flex-direction: column;  /* Cambia a columna en pantallas pequeñas */
-        align-items: center;  /* Centrar horizontalmente */
+        /* flex-direction: column; REMOVED - Keep as row */
+        /* align-items: center; REMOVED */
     }
-    
+
     .music-leyend {
-        margin-top: 10px;  /* Agrega espacio entre el botón y el texto en pantallas pequeñas */
+        /* margin-top: 10px; REMOVED */
+        /* Agrega espacio entre el botón y el texto en pantallas pequeñas */
+        font-size: 1.5rem !important;
+        /* Force to match other menu items */
     }
 }
 
@@ -607,7 +620,7 @@ body {
 }
 
 .post {
-    
+
     padding: 50px 20px;
 }
 
@@ -629,80 +642,92 @@ body {
     width: 300px;
     padding: 20px;
     border-radius: 15px;
-    border: 2px solid #2196F3; /* Color por defecto, se sobrescribirá */
+    border: 2px solid #2196F3;
+    /* Color por defecto, se sobrescribirá */
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     display: flex;
-    flex-direction: column; /* Ajuste para responsividad */
+    flex-direction: column;
+    /* Ajuste para responsividad */
     align-items: center;
     position: relative;
 }
 
 /* Definir variables y efectos de resplandor para cada membresía */
 .blue {
-    --color-membresia: #2196F3; /* Azul */
+    --color-membresia: #2196F3;
+    /* Azul */
     border-color: var(--color-membresia);
     box-shadow: 0 0 15px var(--color-membresia);
 }
 
 .blue .icono-usuario::before,
 .blue .icono-usuario::after {
-    background-color: var(--color-membresia); /* Azul */
+    background-color: var(--color-membresia);
+    /* Azul */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .purple {
-    --color-membresia: #9C27B0; /* Púrpura */
+    --color-membresia: #9C27B0;
+    /* Púrpura */
     border-color: var(--color-membresia);
     box-shadow: 0 0 15px var(--color-membresia);
 }
 
 .purple .icono-usuario::before,
 .purple .icono-usuario::after {
-    background-color: var(--color-membresia); /* Púrpura */
+    background-color: var(--color-membresia);
+    /* Púrpura */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .indigo {
-    --color-membresia: #3F51B5; /* Indigo */
+    --color-membresia: #3F51B5;
+    /* Indigo */
     border-color: var(--color-membresia);
     box-shadow: 0 0 15px var(--color-membresia);
 }
 
 .indigo .icono-usuario::before,
 .indigo .icono-usuario::after {
-    background-color: var(--color-membresia); /* Indigo */
+    background-color: var(--color-membresia);
+    /* Indigo */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .neon {
-    --color-membresia: #FF1493; /* Rosa neón */
+    --color-membresia: #FF1493;
+    /* Rosa neón */
     border-color: var(--color-membresia);
     box-shadow: 0 0 15px var(--color-membresia);
 }
 
 .neon .icono-usuario::before,
 .neon .icono-usuario::after {
-    background-color: var(--color-membresia); /* Rosa neón */
+    background-color: var(--color-membresia);
+    /* Rosa neón */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 .neon-light {
 
-    --color-membresia:#B0C4DE; /* #B0C4DE gris Neón */
+    --color-membresia: #B0C4DE;
+    /* #B0C4DE gris Neón */
     border-color: var(--color-membresia);
     box-shadow: 0 0 15px var(--color-membresia);
 }
 
 .neon-light .icono-usuario::before,
 .neon-light .icono-usuario::after {
-    background-color: var(--color-membresia); /* gris Neón */
+    background-color: var(--color-membresia);
+    /* gris Neón */
     box-shadow: 0 0 10px var(--color-membresia), 0 0 20px var(--color-membresia);
 }
 
 /* Hover efectos */
 .tarjeta:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilos para el icono de usuario */
@@ -719,7 +744,8 @@ body {
     content: '';
     width: 30px;
     height: 30px;
-    background-color: #ccc; /* Este color será sobrescrito por las clases específicas */
+    background-color: #ccc;
+    /* Este color será sobrescrito por las clases específicas */
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -732,7 +758,8 @@ body {
     content: '';
     width: 40px;
     height: 20px;
-    background-color: #ccc; /* Este color será sobrescrito por las clases específicas */
+    background-color: #ccc;
+    /* Este color será sobrescrito por las clases específicas */
     border-radius: 10px / 5px;
     position: absolute;
     top: 30px;
@@ -751,7 +778,8 @@ body {
     font-weight: bold;
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Forma de círculo */
+    border-radius: 50%;
+    /* Forma de círculo */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -785,14 +813,17 @@ body {
     }
 
     .tarjeta {
-        width: 100%; /* Ancho completo en pantallas pequeñas */
-        max-width: 300px; /* Mantiene tamaño máximo */
+        width: 100%;
+        /* Ancho completo en pantallas pequeñas */
+        max-width: 300px;
+        /* Mantiene tamaño máximo */
         padding: 15px;
         margin-bottom: 10px;
     }
 
     .icono-usuario {
-        margin-right: 0; /* Ajuste para centrar el icono en la tarjeta */
+        margin-right: 0;
+        /* Ajuste para centrar el icono en la tarjeta */
     }
 
     .ahorro {
@@ -804,10 +835,12 @@ body {
 }
 
 /* Estilos para los brazos (Opcional) */
-.brazo-izq, .brazo-der {
+.brazo-izq,
+.brazo-der {
     width: 15px;
     height: 40px;
-    background-color: inherit; /* Hereda el color del contenedor */
+    background-color: inherit;
+    /* Hereda el color del contenedor */
     position: absolute;
     top: 25px;
 }
@@ -823,28 +856,446 @@ body {
 }
 
 
-    /* Estilos para el elemento de lista con la clase 'premios' */
-    .premios {
-        text-align: center; /* Centra el contenido dentro del <li> */
-        margin-top: 20px; /* Espacio superior opcional */
-    }
+/* Estilos para el elemento de lista con la clase 'premios' */
+.premios {
+    text-align: center;
+    /* Centra el contenido dentro del <li> */
+    margin-top: 20px;
+    /* Espacio superior opcional */
+}
 
-    .premios img {
-        max-width: 100%; /* La imagen no excederá el ancho de su contenedor */
-        height: auto;    /* Mantiene la proporción de la imagen */
-        display: block;  /* Elimina espacios debajo de la imagen */
-        margin: 0 auto;  /* Centra la imagen horizontalmente */
-    }
+.premios img {
+    max-width: 100%;
+    /* La imagen no excederá el ancho de su contenedor */
+    height: auto;
+    /* Mantiene la proporción de la imagen */
+    display: block;
+    /* Elimina espacios debajo de la imagen */
+    margin: 0 auto;
+    /* Centra la imagen horizontalmente */
+}
 
+.premios p {
+    margin-top: 10px;
+    /* Espacio entre la imagen y la leyenda */
+    font-weight: bold;
+    /* Texto en negrita para la leyenda */
+    font-size: 1em;
+    /* Tamaño de fuente adecuado */
+}
+
+/* Opcional: Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
     .premios p {
-        margin-top: 10px;          /* Espacio entre la imagen y la leyenda */
-        font-weight: bold;         /* Texto en negrita para la leyenda */
-        font-size: 1em;            /* Tamaño de fuente adecuado */
+        font-size: 0.9em;
+        /* Ajusta el tamaño de fuente en pantallas pequeñas */
+    }
+}
+
+/* --- Sección de Noticias y Torre de los Retos --- */
+
+.news-section {
+    padding: 10px;
+    /* Reduced from clamp(...) to compact box */
+    color: #fff;
+    max-width: 100%;
+    /* height: 500px; REMOVED to allow content to fit */
+    /* Was clamped to 1600px, now fills available width */
+    margin: 0 auto;
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.news-post {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #00ffff;
+    width: 100%;
+    max-width: 800px;
+}
+
+.tower-wrapper {
+    width: 100%;
+    max-width: 100%;
+    /* Was clamped to 1200px, now fills parent (1600px) */
+    text-align: center;
+}
+
+.tower-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    margin-bottom: clamp(30px, 5vh, 60px);
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    color: #fff;
+}
+
+.tower-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.header-logo {
+    display: block;
+    max-height: 100px;
+    /* Increased size as requested */
+    width: auto;
+    filter: drop-shadow(0 0 5px #ff00ff);
+    border-radius: 5px;
+    /* Soft edges just in case */
+}
+
+/* Specific adjustments if needed */
+.header-logo[src*="logo.png"] {
+    max-height: 120px;
+}
+
+/* Neon room logo might need to be bigger */
+.header-logo[src*="dragon_neon.jpg"] {
+    max-height: 120px;
+    /* Match Pump logo visual size */
+    border-radius: 50%;
+}
+
+/* Circular Dragon Logo */
+
+.pump-logo {
+    display: block;
+    margin: 10px auto 0;
+    max-height: 60px;
+    /* Adjust as needed */
+    filter: drop-shadow(0 0 5px #ff00ff);
+}
+
+.tower {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Fixed gap */
+}
+
+.tower-level {
+    display: flex;
+    align-items: center;
+    background: rgba(20, 20, 20, 0.8);
+    border: 3px solid #00ffff;
+    /* Fixed border */
+    border-radius: 12px;
+    padding: 20px;
+    /* Fixed padding */
+    height: 220px;
+    /* Fixed height for stability */
+    box-sizing: border-box;
+    /* Include padding/border in height */
+    flex-shrink: 0;
+    /* Prevent shrinking */
+    gap: 20px;
+    width: 90%;
+    max-width: 95%;
+    /* Ensure it never fully hits the edge */
+    /* Constrain width to fit in container */
+    margin: 0 auto;
+    /* Center the card */
+    transition: transform 0.3s;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.tower-level:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.level-top {
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    background: linear-gradient(90deg, rgba(255, 0, 255, 0.1), transparent);
+}
+
+.level-top h3 {
+    color: #ff00ff;
+}
+
+.player-slot {
+    flex-shrink: 0;
+    width: clamp(100px, 14vw, 200px);
+    /* Increased to fit larger photo */
+    text-align: center;
+}
+
+.player-photo,
+.placeholder-photo {
+    width: clamp(110px, 12vw, 160px);
+    /* Increased from 60px */
+    height: clamp(110px, 12vw, 160px);
+    /* Increased from 60px */
+    border-radius: 50%;
+    border: clamp(2px, 0.2vw, 4px) solid #fff;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.placeholder-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: #333;
+    color: #666;
+}
+
+.player-name {
+    display: block;
+    font-size: 0.7rem;
+    color: #ccc;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.challenge-info {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.challenge-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #00ffff;
+}
+
+.challenge-info p {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin: 0;
+}
+
+/* Player Stats */
+.player-stats {
+    margin-top: 8px;
+    width: 100%;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+    font-size: 0.75rem;
+    /* Small text for stats */
+}
+
+.stat-label {
+    width: 80px;
+    /* Increased to fit "Resistencia" */
+    color: #ccc;
+    font-weight: bold;
+}
+
+.stat-bar {
+    flex-grow: 1;
+    height: 5px;
+    /* Slim bars */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-left: 5px;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 3px;
+    box-shadow: 0 0 5px currentColor;
+    /* Neon glow using color */
+}
+
+.stat-info {
+    font-size: 0.75rem;
+    color: #00ffff;
+    margin-top: 4px;
+    text-align: left;
+    /* Default Left for Desktop */
+    font-weight: bold;
+}
+
+
+
+/* --- Auto-Scroll Tower --- */
+.tower-scroll-container {
+    height: 430px;
+    /* Adjusted to ~510px to show 2 levels per user request */
+    /* Altura visible de la torre */
+    padding-top: 30px;
+    /* Push content down to avoid top mask fade */
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    /* Efecto de desvanecimiento arriba y abajo */
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30px, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30px, black 95%, transparent);
+}
+
+.tower {
+    /* .tower ya tiene display: flex y gap: 15px */
+    animation: towerScrollPaused 200s linear infinite;
+    /* Increased to 80s for very slow scroll */
+    will-change: transform;
+}
+
+/* Pausar al pasar el mouse */
+.tower-scroll-container:hover .tower {
+    animation-play-state: paused;
+    cursor: pointer;
+}
+
+@keyframes towerScrollMobile {
+    0% {
+        transform: translateY(-4000px);
+        /* Adjusted for taller mobile cards (10 * 400 approx) */
+        opacity: 0;
     }
 
-    /* Opcional: Ajustes para dispositivos móviles */
-    @media (max-width: 600px) {
-        .premios p {
-            font-size: 0.9em; /* Ajusta el tamaño de fuente en pantallas pequeñas */
-        }
+    2% {
+        opacity: 1;
+        transform: translateY(-4000px);
     }
+
+    5% {
+        transform: translateY(-4000px);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+}
+
+/*Se deben acomodar los transform cada ves que se agreguen mas tarjetas*/
+@keyframes towerScrollPaused {
+    0% {
+        transform: translateY(-1990px);
+        /* Adjusted for 10 levels: -710px (base) - 1200px (5 new levels * 240px) */
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 1;
+        transform: translateY(-1990px);
+        /* Hold position (fade in) */
+    }
+
+    5% {
+        transform: translateY(-1990px);
+        /* Hold position for ~3s (5% of 60s) */
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+}
+
+/* Specific styles for Level 10 (Top) Readability */
+.level-top h3 {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff !important;
+    font-size: 1.4rem;
+}
+
+.level-top p {
+    color: #ffffff !important;
+    text-shadow: 0 0 5px #ff00ff;
+    font-weight: bold;
+    text-align: center;
+    /* Centered as requested */
+}
+
+/* Responsividad para la torre - MOVED TO END TO OVERRIDE GLOBAL STYLES */
+@media (max-width: 600px) {
+    .tower-level {
+        flex-direction: column;
+        text-align: center;
+        height: 400px;
+        /* Increased height for stacked content */
+        margin-bottom: 20px;
+        /* Ensure visual gap */
+    }
+
+    .challenge-info {
+        text-align: center;
+        width: 100%;
+    }
+
+    .tower-title {
+        font-size: 1.8rem;
+    }
+
+    .tower {
+        animation-name: towerScrollMobile;
+        /* Use specific mobile animation */
+    }
+
+    .stat-info {
+        text-align: center;
+        /* Center only on Mobile */
+    }
+}
+
+/* Update Mobile Animation to correct height check (-4300px) */
+@keyframes towerScrollMobile {
+    0% {
+        transform: translateY(-3970px);
+        /* 10 levels * ~420px */
+        opacity: 0;
+    }
+
+    2% {
+        opacity: 1;
+        transform: translateY(-3970px);
+    }
+
+    5% {
+        transform: translateY(-3970px);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+}
