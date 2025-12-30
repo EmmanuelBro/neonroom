@@ -1144,7 +1144,7 @@ body {
 
 .tower {
     /* .tower ya tiene display: flex y gap: 15px */
-    animation: towerScrollPaused 2s linear infinite;
+    animation: towerScrollPaused 200s linear infinite;
     /* Increased to 80s for very slow scroll */
     will-change: transform;
 }
