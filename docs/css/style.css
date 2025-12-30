@@ -1265,6 +1265,27 @@ body {
         text-align: center;
         /* Center only on Mobile */
     }
+
+    /* Fix for logos on small screens */
+    .tower-logos {
+        gap: 10px;
+        /* Reduce gap */
+    }
+
+    .header-logo {
+        max-height: 50px;
+        /* Smaller logos on mobile */
+    }
+
+    /* Force override for Pump It Up logo due to filename specificity */
+    .header-logo[src*="logo.png"] {
+        max-height: 70px !important;
+    }
+
+    .header-logo[src*="dragon_neon.jpg"] {
+        max-height: 70px;
+        /* Ensure specific logo also shrinks */
+    }
 }
 
 /* Update Mobile Animation to correct height check (-4300px) */
