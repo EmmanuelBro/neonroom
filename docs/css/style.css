@@ -1128,9 +1128,8 @@ body {
 
 /* --- Auto-Scroll Tower --- */
 .tower-scroll-container {
-    height: 430px;
-    /* Adjusted to ~510px to show 2 levels per user request */
-    /* Altura visible de la torre */
+    height: 260px;
+    /* Show only 1 card (220px + gap) */
     padding-top: 30px;
     /* Push content down to avoid top mask fade */
     box-sizing: border-box;
@@ -1140,11 +1139,26 @@ body {
     /* Efecto de desvanecimiento arriba y abajo */
     mask-image: linear-gradient(to bottom, transparent 0%, black 30px, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30px, black 95%, transparent);
+    transition: height 0.3s ease;
+    /* Smooth height change */
+}
+
+/* Remove mask and height restriction when CTA is active */
+.tower-scroll-container.cta-mode {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    height: auto !important;
+    /* Allow card to expand */
+    min-height: 260px;
+    /* Keep minimum height */
+    overflow: visible !important;
+    padding-top: 10px;
+    /* Adjust padding */
 }
 
 .tower {
     /* .tower ya tiene display: flex y gap: 15px */
-    animation: towerScrollPaused 160s linear infinite;
+    animation: towerScrollPaused 100s linear infinite;
     /* Increased to 80s for very slow scroll */
     will-change: transform;
 }
@@ -1191,29 +1205,26 @@ body {
 /*Se deben acomodar los transform cada ves que se agreguen mas tarjetas*/
 @keyframes towerScrollPaused {
     0% {
-        transform: translateY(-2085px);
+        transform: translateY(-2150px);
         /* Adjusted for 10 levels: -710px (base) - 1200px (5 new levels * 240px) */
         opacity: 0;
     }
 
     2% {
         opacity: 1;
-        transform: translateY(-2085px);
+        transform: translateY(-2150px);
         /* Hold position (fade in) */
     }
 
     5% {
-        transform: translateY(-2085px);
+        transform: translateY(-2150px);
         /* Hold position for ~3s (5% of 60s) */
         opacity: 1;
     }
 
-    80% {
+    /* Smooth Scroll until the very end */
+    75% {
         transform: translateY(0px);
-        opacity: 1;
-    }
-
-    95% {
         opacity: 1;
     }
 
@@ -1240,6 +1251,11 @@ body {
 
 /* Responsividad para la torre - MOVED TO END TO OVERRIDE GLOBAL STYLES */
 @media (max-width: 600px) {
+    .tower-scroll-container {
+        height: 450px;
+        /* Mobile card is 400px + gap */
+    }
+
     .tower-level {
         flex-direction: column;
         text-align: center;
@@ -1308,12 +1324,9 @@ body {
         opacity: 1;
     }
 
-    80% {
+    /* Smooth Scroll until the very end */
+    75% {
         transform: translateY(0px);
-        opacity: 1;
-    }
-
-    95% {
         opacity: 1;
     }
 

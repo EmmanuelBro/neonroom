@@ -114,16 +114,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Si estamos en home, añadimos la clase .transparent
-                if (hash === '#home' || hash === '') {
-                    mainElement.classList.add('transparent');
-                } else {
-                    // Para las otras páginas, quitamos la clase .transparent
-                    mainElement.classList.remove('transparent');
-                }
+                const headerCounter = document.getElementById('header-counter');
 
                 if (hash === '#news') {
-                    setTimeout(initTowerScroll, 500); // Pequeño delay para asegurar renderizado
+                    // mainElement.classList.add('transparent'); NO - Keep white background for News
+                    mainElement.classList.remove('transparent'); // Restore white background
+                    initTowerScroll();
+
+                    // Show Header Counter ONLY for News
+                    if (headerCounter) headerCounter.style.display = 'block';
+                } else {
+                    // For other pages, remove transparent class (default white)
+                    mainElement.classList.remove('transparent');
+                    if (headerCounter) headerCounter.style.display = 'none';
+
+                    // Only Home is transparent
+                    if (hash === '#home' || hash === '') {
+                        mainElement.classList.add('transparent');
+                    }
                 }
             })
             .catch(error => {
@@ -256,18 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             level: 5,
-            title: "Fernando - El Ferna",
-            desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
-            photo: "images/fotos/fernando.jpg",
-            stats: {
-                impetu: 60,
-                resistencia: 75,
-                velocidad: 70,
-                maxLevels: "19-22"
-            }
-        },
-        {
-            level: 4,
             title: "Cecilia - Sexylia",
             desc: "Famosa por pasar niveles 22 con pura maña un Ímpetu alto y velocidad muy buena.",
             photo: "images/fotos/cecilia.jpg",
@@ -276,6 +272,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 resistencia: 65,
                 velocidad: 60,
                 maxLevels: "18-22"
+            }
+        },
+        {
+            level: 4,
+            title: "Fernando - El Ferna",
+            desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
+            photo: "images/fotos/fernando.jpg",
+            stats: {
+                impetu: 60,
+                resistencia: 75,
+                velocidad: 70,
+                maxLevels: "19-22"
             }
         },
         {
@@ -293,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 2,
             title: "Erick - Gil",
-            desc: "Muy buena resistencia, logra conseguir niveles S y doble SS en 16 y 17.",
+            desc: "Muy buena resistencia, logra conseguir scores S y doble SS en niveles 16 y 17.",
             photo: "images/fotos/gil.jpeg",
             stats: {
                 impetu: 65,
@@ -305,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 1,
             title: "Yanet - La Galle",
-            desc: "Con mucha emoción y buena energía, se esfuerza al máximo logrando scores S y SS en niveles intermedios.",
+            desc: "Siempre se esfuerza al máximo! logrando scores S y SS en niveles intermedios.",
             photo: "images/fotos/yanet.jpg",
             stats: {
                 impetu: 80,
@@ -422,9 +430,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Manda un WhatsApp y coordinemos una reta 🤙</p>
                     <a href="https://wa.me/525525131883" target="_blank" class="cta-phone">5525131883</a>
                 </div>
-                <div class="cta-decoration">🏆✨</div>
+                <!-- Removed bouncing trophy to save space -->
             </div>
         `;
+
+        // Add class to container to remove mask/adjust height
+        towerContainer.classList.add('cta-mode');
 
         // Cycle Logic: Wait 6s, then fade out and restart
         setTimeout(() => {
@@ -448,6 +459,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function restartTower() {
         const towerContainer = document.querySelector('.tower-scroll-container');
         if (!towerContainer) return;
+
+        // Remove CTA mode class
+        towerContainer.classList.remove('cta-mode');
 
         // Restore basic structure
         towerContainer.innerHTML = '<div class="tower"></div>';
