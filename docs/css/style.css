@@ -1144,7 +1144,7 @@ body {
 
 .tower {
     /* .tower ya tiene display: flex y gap: 15px */
-    animation: towerScrollPaused 200s linear infinite;
+    animation: towerScrollPaused 2s linear infinite;
     /* Increased to 80s for very slow scroll */
     will-change: transform;
 }
@@ -1187,6 +1187,7 @@ body {
     }
 }
 
+/*Aqui se cambia la posicion de las tarjetas, en que altura iniciar */
 /*Se deben acomodar los transform cada ves que se agreguen mas tarjetas*/
 @keyframes towerScrollPaused {
     0% {
@@ -1327,35 +1328,65 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* Back to center but with auto height handling if needed, actually flex-start is safer for overflow but we want to fit it */
+    flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: auto;
+    /* Allow natural height */
+    min-height: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
+    /* Reduced padding */
     animation: fadeInCTA 2s ease-in-out;
-    color: #fff;
-    /* Ensure text is visible */
-    background: rgba(0, 0, 0, 0.85);
-    /* Slightly darker background */
+    /* Matching Level 1 Card Style */
+    background: rgba(20, 20, 20, 0.8);
+    border: 3px solid #00ffff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    /* Neon glow */
+    margin: -20px auto 20px;
+    max-width: 90%;
+    /* Responsive width like cards */
+    overflow: hidden;
+    /* NO SCROLL BAR */
 }
 
 .tower-cta h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    /* Slightly smaller to fit */
+    margin-top: 0;
+    margin-bottom: 10px;
+    /* Reduced margin */
     color: #fff;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    /* Neon Pink Glow */
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    /* Blue Neon for title */
+
+    /* Ensure title wraps properly on small screens */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+    .tower-cta h2 {
+        font-size: 1.5rem;
+        /* Smaller font for mobile */
+        margin-bottom: 15px;
+    }
 }
 
 .tower-cta p {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    line-height: 1.5;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    /* Reduced margin */
+    line-height: 1.3;
     color: #e0e0e0;
 }
 
 .cta-contact {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 10px;
+    /* Reduced margin */
+    padding: 15px;
+    /* Reduced padding */
     border: 2px solid #00ffff;
     /* Neon Blue Border */
     border-radius: 15px;
@@ -1368,6 +1399,7 @@ body {
     font-size: 2.2rem;
     font-weight: bold;
     color: #00ffff !important;
+    /* Standard Neon Blue */
     text-decoration: none;
     margin-top: 10px;
     text-shadow: 0 0 10px #00ffff;
@@ -1381,9 +1413,10 @@ body {
 }
 
 .cta-decoration {
-    font-size: 3rem;
-    margin-top: 30px;
-    animation: bounce 2s infinite;
+    font-size: 2.5rem;
+    margin-top: 15px;
+    /* Reduced margin */
+    animation: bounce 200s infinite;
 }
 
 @keyframes fadeInCTA {

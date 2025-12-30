@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 1,
             title: "Yanet - La Galle",
-            desc: "Con gran emoción, se esfuerza al máximo y logra rangos S y SS en niveles intermedios.",
+            desc: "Con mucha emoción y buena energía, se esfuerza al máximo logrando scores S y SS en niveles intermedios.",
             photo: "images/fotos/yanet.jpg",
             stats: {
                 impetu: 80,
@@ -416,11 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Replace content with CTA
         towerContainer.innerHTML = `
             <div class="tower-cta">
-                <h2>¿Quieres ser una Leyenda?</h2>
-                <p>Si quieres pertenecer a la Torre de los Campeones retando a alguno de los participantes...</p>
+                <h2>¿Quieres ser un Campeón?</h2>
+                <p>¡Forma parte de la Torre de los​ Campeones retando a alguno de los participantes!​</p>
                 <div class="cta-contact">
-                    <p>Marca al siguiente número:</p>
-                    <a href="tel:5525131883" class="cta-phone">55 2513 1883</a>
+                    <p>Manda un WhatsApp y coordinemos una reta 🤙</p>
+                    <a href="https://wa.me/525525131883" target="_blank" class="cta-phone">5525131883</a>
                 </div>
                 <div class="cta-decoration">🏆✨</div>
             </div>
@@ -435,6 +435,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(restartTower, 2000);
             }
         }, 6000); // Display time: 6 seconds
+
+        // Hide Logos for cleaner look
+        const logos = document.querySelector('.tower-logos');
+        if (logos) logos.style.display = 'none';
+
+        // Hide Title text as well to make it cleaner? No user just said logos.
+        // Actually, reducing the title or hiding it might help move things up too. 
+        // User said: "elimina lo iconos... parta que se vea mas arriba"
     }
 
     function restartTower() {
@@ -443,6 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Restore basic structure
         towerContainer.innerHTML = '<div class="tower"></div>';
+
+        // Restore Logos
+        const logos = document.querySelector('.tower-logos');
+        if (logos) logos.style.display = 'flex'; // Restore flex display
 
         // Re-initialize scroll animation
         initTowerScroll();
