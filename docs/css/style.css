@@ -1158,7 +1158,7 @@ body {
 
 .tower {
     /* .tower ya tiene display: flex y gap: 15px */
-    animation: towerScrollPaused 100s linear infinite;
+    animation: towerScrollPaused 40s linear infinite;
     /* Increased to 80s for very slow scroll */
     will-change: transform;
 }
@@ -1223,7 +1223,7 @@ body {
     }
 
     /* Smooth Scroll until the very end */
-    75% {
+    90% {
         transform: translateY(0px);
         opacity: 1;
     }
@@ -1304,6 +1304,16 @@ body {
         max-height: 70px;
         /* Ensure specific logo also shrinks */
     }
+
+    /* Hide header counter on mobile to prevent overlap */
+    #header-counter {
+        display: none !important;
+    }
+
+    /* Hide selector separator on mobile */
+    .header-separator {
+        display: none !important;
+    }
 }
 
 /* Update Mobile Animation to correct height check (-4300px) */
@@ -1358,7 +1368,10 @@ body {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
     /* Neon glow */
     margin: -20px auto 20px;
-    max-width: 90%;
+    max-width: 100%;
+    /* Full width allowed */
+    width: 100%;
+    /* Use almost all space */
     /* Responsive width like cards */
     overflow: hidden;
     /* NO SCROLL BAR */
@@ -1395,16 +1408,35 @@ body {
     color: #e0e0e0;
 }
 
-.cta-contact {
-    margin-top: 10px;
-    /* Reduced margin */
-    padding: 15px;
-    /* Reduced padding */
-    border: 2px solid #00ffff;
-    /* Neon Blue Border */
-    border-radius: 15px;
-    background: rgba(0, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+.cta-contact-box {
+    margin-top: 5px;
+    width: 100%;
+    /* Take full width */
+    max-width: none;
+    /* Remove restrictions */
+    padding: 0;
+    /* Remove padding */
+    border: none !important;
+    /* FORCE No border */
+    background: transparent !important;
+    /* Transparent background */
+    box-shadow: none !important;
+    /* No shadow */
+}
+
+.qr-code-container {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.cta-qr {
+    width: 120px;
+    height: 120px;
+    display: block;
 }
 
 .cta-phone {
@@ -1427,8 +1459,8 @@ body {
 
 .cta-decoration {
     font-size: 2.5rem;
-    margin-top: 15px;
-    /* Reduced margin */
+    margin: 0;
+    /* Removed margin for flex alignment */
     animation: bounce 2s infinite;
 }
 
@@ -1467,5 +1499,38 @@ body {
 
     to {
         opacity: 0;
+    }
+}
+
+/* CTA Logo Styling */
+.cta-logo {
+    height: 100px;
+    /* Reduced size as requested */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.cta-logo.dragon {
+    border-radius: 50%;
+    /* Circular Dragon Logo */
+    border: 2px solid #00ffff;
+    /* Optional: Neon border for the circle */
+}
+
+@media (max-width: 600px) {
+    .cta-logo {
+        height: 40px;
+        /* Smaller on mobile */
+    }
+
+    .cta-header-row {
+        gap: 5px !important;
+        /* Tighter gap on mobile */
+    }
+
+    .tower-cta h2 {
+        font-size: 1.2rem !important;
+        /* Smaller text to fit in one line if possible */
     }
 }

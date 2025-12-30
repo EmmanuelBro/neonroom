@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 6,
             title: "Fabian - El Grande",
-            desc: "Buena resistencia y un ímpetu considerable, logra pasar canciones difíciles con pura maña obteniendo scores de S y SS.",
+            desc: "Buena resistencia y un ímpetu considerable, logra pasar canciones difíciles obteniendo scores de S y SS.",
             photo: "images/fotos/grande.jpg",
             stats: {
                 impetu: 40,
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 5,
             title: "Cecilia - Sexylia",
-            desc: "Famosa por pasar niveles 22 con pura maña un Ímpetu alto y velocidad muy buena.",
+            desc: "Famosa por pasar niveles 22 con pura maña, un Ímpetu alto y velocidad muy buena.",
             photo: "images/fotos/cecilia.jpg",
             stats: {
                 impetu: 55,
@@ -424,13 +424,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Replace content with CTA
         towerContainer.innerHTML = `
             <div class="tower-cta">
-                <h2>¿Quieres ser un Campeón?</h2>
-                <p>¡Forma parte de la Torre de los​ Campeones retando a alguno de los participantes!​</p>
-                <div class="cta-contact">
-                    <p>Manda un WhatsApp y coordinemos una reta 🤙</p>
+                <div class="cta-header-row" style="display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+                    <img src="images/pump_logo.png" class="cta-logo pump">
+                    <h2 style="flex: 1; margin: 0;">¿Quieres ser un Campeón?</h2>
+                    <img src="images/dragon_neon.jpg" class="cta-logo dragon">
+                </div>
+                <p>¡Forma parte de la Torre de los​ Campeones retando a alguno de los challengers!​</p>
+                <div class="cta-contact-box">
+                    <p>Escanea el siguiente código QR o envia un WhatsApp y coordinemos una reta 🤙</p>
+                    <div class="qr-row" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                        <div class="cta-decoration">🏆</div>
+                        <div class="qr-code-container">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/525525131883" alt="WhatsApp QR Code" class="cta-qr">
+                        </div>
+                        <div class="cta-decoration">🏆</div>
+                    </div>
                     <a href="https://wa.me/525525131883" target="_blank" class="cta-phone">5525131883</a>
                 </div>
-                <!-- Removed bouncing trophy to save space -->
             </div>
         `;
 
@@ -445,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Wait for fade out animation (2s) then restart
                 setTimeout(restartTower, 2000);
             }
-        }, 6000); // Display time: 6 seconds
+        }, 10000); // Display time: 6 seconds
 
         // Hide Logos for cleaner look
         const logos = document.querySelector('.tower-logos');
