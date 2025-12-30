@@ -1416,7 +1416,7 @@ body {
     font-size: 2.5rem;
     margin-top: 15px;
     /* Reduced margin */
-    animation: bounce 200s infinite;
+    animation: bounce 2s infinite;
 }
 
 @keyframes fadeInCTA {
