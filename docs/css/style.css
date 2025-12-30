@@ -590,7 +590,8 @@ html {
 
 /* Ajustes para la leyenda */
 .music-leyend {
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
+    /* Match other menu items exactly */
     /* Ajusta el tamaño de fuente si es necesario */
     color: #fff;
     /* Puedes cambiar el color según tu diseño */
@@ -1189,19 +1190,19 @@ body {
 /*Se deben acomodar los transform cada ves que se agreguen mas tarjetas*/
 @keyframes towerScrollPaused {
     0% {
-        transform: translateY(-1990px);
+        transform: translateY(-2085px);
         /* Adjusted for 10 levels: -710px (base) - 1200px (5 new levels * 240px) */
         opacity: 0;
     }
 
     2% {
         opacity: 1;
-        transform: translateY(-1990px);
+        transform: translateY(-2085px);
         /* Hold position (fade in) */
     }
 
     5% {
-        transform: translateY(-1990px);
+        transform: translateY(-2085px);
         /* Hold position for ~3s (5% of 60s) */
         opacity: 1;
     }
@@ -1317,6 +1318,108 @@ body {
 
     100% {
         transform: translateY(0px);
+        opacity: 0;
+    }
+}
+
+/* Tower Call To Action */
+.tower-cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    animation: fadeInCTA 2s ease-in-out;
+    color: #fff;
+    /* Ensure text is visible */
+    background: rgba(0, 0, 0, 0.85);
+    /* Slightly darker background */
+}
+
+.tower-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    /* Neon Pink Glow */
+}
+
+.tower-cta p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #e0e0e0;
+}
+
+.cta-contact {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #00ffff;
+    /* Neon Blue Border */
+    border-radius: 15px;
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.cta-phone {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #00ffff !important;
+    text-decoration: none;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #00ffff;
+    transition: transform 0.3s, text-shadow 0.3s;
+}
+
+.cta-phone:hover {
+    transform: scale(1.1);
+    color: #fff !important;
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+}
+
+.cta-decoration {
+    font-size: 3rem;
+    margin-top: 30px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes fadeInCTA {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Transitions */
+.fade-out {
+    animation: fadeOut 2s forwards;
+    /* 2s fade out */
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
         opacity: 0;
     }
 }

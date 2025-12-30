@@ -202,14 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 10,
             title: "Leyenda Neon",
-            desc: "EN ESPERA DEL CAMPEÓN DE Pump It Up en NEÓN ROOM",
+            desc: "EN ESPERA DEL CAMPEÓN DE PUMP IT UP EN NEÓN ROOM",
             photo: "images/liu_kang.jpg", // Placeholder
             specialClass: "level-top"
         },
         {
             level: 9,
             title: "Pablo - Hulk",
-            desc: "Poca resistencia pero muy bueno con la maña, Logra conseguir SS en niveles 20-21 e incluso S en niveles 22.",
+            desc: "Poca resistencia pero muy bueno con la maña, logra conseguir SS en niveles 20-21 e incluso S en niveles 22.",
             photo: "images/fotos/hulk.jpg",
             stats: {
                 impetu: 60,
@@ -238,18 +238,18 @@ document.addEventListener('DOMContentLoaded', () => {
             stats: {
                 impetu: 50,
                 resistencia: 90,
-                velocidad: 80,
+                velocidad: 85,
                 maxLevels: "20-22"
             }
         },
         {
             level: 6,
             title: "Fabian - El Grande",
-            desc: "Buena resistencia y un ímpetu considerable. Pasa canciones difíciles con pura maña (S/SS).",
+            desc: "Buena resistencia y un ímpetu considerable, logra pasar canciones difíciles con pura maña obteniendo scores de S y SS.",
             photo: "images/fotos/grande.jpg",
             stats: {
-                impetu: 55,
-                resistencia: 80,
+                impetu: 40,
+                resistencia: 70,
                 velocidad: 75,
                 maxLevels: "20-22"
             }
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
             photo: "images/fotos/fernando.jpg",
             stats: {
-                impetu: 55,
+                impetu: 60,
                 resistencia: 75,
                 velocidad: 70,
                 maxLevels: "19-22"
@@ -272,19 +272,19 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Famosa por pasar niveles 22 con pura maña un Ímpetu alto y velocidad muy buena.",
             photo: "images/fotos/cecilia.jpg",
             stats: {
-                impetu: 50,
+                impetu: 55,
                 resistencia: 65,
-                velocidad: 63,
+                velocidad: 60,
                 maxLevels: "18-22"
             }
         },
         {
             level: 3,
             title: "Gustavo - El Gus",
-            desc: "Equilibrado. Supera niveles 17 y 18 con buenos scores y hasta SSS.",
+            desc: "Equilibrado, supera niveles 17 y 18 con buenos scores y hasta SSS.",
             photo: "images/fotos/gustavo.jpg",
             stats: {
-                impetu: 50,
+                impetu: 45,
                 resistencia: 75,
                 velocidad: 55,
                 maxLevels: "18-22"
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Muy buena resistencia, logra conseguir niveles S y doble SS en 16 y 17.",
             photo: "images/fotos/gil.jpeg",
             stats: {
-                impetu: 55,
+                impetu: 65,
                 resistencia: 45,
                 velocidad: 40,
                 maxLevels: "16-19"
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Con gran emoción, se esfuerza al máximo y logra rangos S y SS en niveles intermedios.",
             photo: "images/fotos/yanet.jpg",
             stats: {
-                impetu: 90,
+                impetu: 80,
                 resistencia: 30,
                 velocidad: 35,
                 maxLevels: "15-18"
@@ -395,6 +395,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalContent = tower.innerHTML;
         // Clonar el contenido para el efecto infinito
         tower.innerHTML += originalContent;
+
+        // Logic for CTA after 2 loops
+        let loopCount = 0;
+        tower.addEventListener('animationiteration', () => {
+            loopCount++;
+            // The animation logic is tricky because 'infinite' usually means no iteration event until end? 
+            // Actually animationiteration fires at the end of each cycle.
+            // We want 1 full cycle.
+            if (loopCount >= 1) {
+                showTowerCTA();
+            }
+        });
+    }
+
+    function showTowerCTA() {
+        const towerContainer = document.querySelector('.tower-scroll-container');
+        if (!towerContainer) return;
+
+        // Replace content with CTA
+        towerContainer.innerHTML = `
+            <div class="tower-cta">
+                <h2>¿Quieres ser una Leyenda?</h2>
+                <p>Si quieres pertenecer a la Torre de los Campeones retando a alguno de los participantes...</p>
+                <div class="cta-contact">
+                    <p>Marca al siguiente número:</p>
+                    <a href="tel:5525131883" class="cta-phone">55 2513 1883</a>
+                </div>
+                <div class="cta-decoration">🏆✨</div>
+            </div>
+        `;
+
+        // Cycle Logic: Wait 6s, then fade out and restart
+        setTimeout(() => {
+            const ctaElement = towerContainer.querySelector('.tower-cta');
+            if (ctaElement) {
+                ctaElement.classList.add('fade-out');
+                // Wait for fade out animation (2s) then restart
+                setTimeout(restartTower, 2000);
+            }
+        }, 6000); // Display time: 6 seconds
+    }
+
+    function restartTower() {
+        const towerContainer = document.querySelector('.tower-scroll-container');
+        if (!towerContainer) return;
+
+        // Restore basic structure
+        towerContainer.innerHTML = '<div class="tower"></div>';
+
+        // Re-initialize scroll animation
+        initTowerScroll();
     }
 
     // Inicializar el scroll de la torre si estamos en la página correcta
