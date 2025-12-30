@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const headerCounter = document.getElementById('header-counter');
 
                 if (hash === '#news') {
+                    document.body.classList.add('news-page');
                     // mainElement.classList.add('transparent'); NO - Keep white background for News
                     mainElement.classList.remove('transparent'); // Restore white background
                     initTowerScroll();
@@ -124,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Show Header Counter ONLY for News
                     if (headerCounter) headerCounter.style.display = 'block';
                 } else {
+                    document.body.classList.remove('news-page');
                     // For other pages, remove transparent class (default white)
                     mainElement.classList.remove('transparent');
                     if (headerCounter) headerCounter.style.display = 'none';
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelsData = [
         {
             level: 10,
-            title: "Leyenda Neon",
+            title: "Leyenda Neón",
             desc: "EN ESPERA DEL CAMPEÓN DE PUMP IT UP EN NEÓN ROOM",
             photo: "images/liu_kang.jpg", // Placeholder
             specialClass: "level-top"
@@ -222,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stats: {
                 impetu: 60,
                 resistencia: 20,
-                velocidad: 90,
+                velocidad: 95,
                 maxLevels: "22-23"
             }
         },
@@ -244,15 +246,15 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Excelente resistencia y energía, logra pasar algunos niveles 20, 21 y 22 con rango S.",
             photo: "images/fotos/emma.jpg",
             stats: {
-                impetu: 50,
+                impetu: 55,
                 resistencia: 90,
-                velocidad: 85,
+                velocidad: 80,
                 maxLevels: "20-22"
             }
         },
         {
             level: 6,
-            title: "Fabian - El Grande",
+            title: "Fabian - Grande",
             desc: "Buena resistencia y un ímpetu considerable, logra pasar canciones difíciles obteniendo scores de S y SS.",
             photo: "images/fotos/grande.jpg",
             stats: {
@@ -268,9 +270,9 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Famosa por pasar niveles 22 con pura maña, un Ímpetu alto y velocidad muy buena.",
             photo: "images/fotos/cecilia.jpg",
             stats: {
-                impetu: 55,
-                resistencia: 65,
-                velocidad: 60,
+                impetu: 50,
+                resistencia: 60,
+                velocidad: 70,
                 maxLevels: "18-22"
             }
         },
@@ -280,9 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
             photo: "images/fotos/fernando.jpg",
             stats: {
-                impetu: 60,
-                resistencia: 75,
-                velocidad: 70,
+                impetu: 55,
+                resistencia: 70,
+                velocidad: 65,
                 maxLevels: "19-22"
             }
         },
@@ -330,66 +332,91 @@ document.addEventListener('DOMContentLoaded', () => {
 
         towerContainer.innerHTML = ''; // Clear existing content
 
+        const template = document.getElementById('tower-card-template');
+        if (!template) {
+            console.error('Template #tower-card-template not found!');
+            return;
+        }
+
         levelsData.forEach(level => {
-            const levelDiv = document.createElement('div');
-            levelDiv.className = `tower-level ${level.specialClass || ''} ${level.level === 1 ? 'level-bottom' : ''}`;
+            const clone = template.content.cloneNode(true);
+            const levelDiv = clone.querySelector('.tower-level');
 
-            // Player Slot
-            let playerSlotHTML = '';
+            // 1. Level Classes
+            levelDiv.classList.add(...(level.specialClass || '').split(' ').filter(c => c));
+            if (level.level === 1) levelDiv.classList.add('level-bottom');
+
+            // 2. Player Slot (Image or Placeholder)
+            const playerSlot = clone.querySelector('.player-slot');
             if (level.photo) {
-                playerSlotHTML = `
-                    <div class="player-slot">
-                        <img src="${level.photo}" alt="${level.title}" class="player-photo">
-                    </div>`;
+                const img = document.createElement('img');
+                img.src = level.photo;
+                img.alt = level.title;
+                img.className = 'player-photo';
+                playerSlot.appendChild(img);
             } else {
-                playerSlotHTML = `
-                    <div class="player-slot">
-                        <div class="placeholder-photo">?</div>
-                    </div>`;
+                const placeholder = document.createElement('div');
+                placeholder.className = 'placeholder-photo';
+                placeholder.textContent = '?';
+                playerSlot.appendChild(placeholder);
             }
 
-            // Stats HTML
-            let statsHTML = '';
-            if (level.stats) {
-                statsHTML = `
-                    <div class="player-stats">
-                        <div class="stat-row">
-                            <span class="stat-label">Ímpetu</span>
-                            <div class="stat-bar"><div class="stat-fill" style="width: ${level.stats.impetu}%; background: #bd00ff; color: #bd00ff;"></div></div>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Resistencia</span>
-                            <div class="stat-bar"><div class="stat-fill" style="width: ${level.stats.resistencia}%; background: #bd00ff; color: #bd00ff;"></div></div>
-                        </div>
-                        <div class="stat-row">
-                            <span class="stat-label">Velocidad</span>
-                            <div class="stat-bar"><div class="stat-fill" style="width: ${level.stats.velocidad}%; background: #bd00ff; color: #bd00ff;"></div></div>
-                        </div>
-                        <div class="stat-info">Max Level Promedio: ${level.stats.maxLevels}</div>
-                    </div>`;
-            }
+            // 3. Info (Title, Rank, Desc)
+            // Title
+            const titleNode = document.createTextNode(props_title(level.title));
+            const levelTitle = clone.querySelector('.level-title');
+            levelTitle.prepend(titleNode);
 
-            // Calculate Rank (10 down to 1)
+            // Helper to get just the name part if needed, but here simple prepend works 
+            // if we assume structure is text + <br> + span. 
+            // Actually, innerHTML is safer for the <br> structure or we reconstruct it.
+            // Let's reconstruction for safety to avoid losing the span.
+            levelTitle.innerHTML = `${level.title}<br>`;
+
+            // Re-append the rank label span (it was wiped by innerHTML)
+            const rankLabelSpan = document.createElement('span');
+            rankLabelSpan.className = 'level-rank-label';
+            rankLabelSpan.style.cssText = "font-size: 0.8em; color: #eee;";
+            rankLabelSpan.textContent = "Posición en la torre: ";
+
+            const rankValueSpan = document.createElement('span');
+            rankValueSpan.className = 'level-rank';
+
+            // Calculate Rank
             const rank = 11 - level.level;
+            rankValueSpan.textContent = `#${rank}`;
 
-            // Only color the rank # number Blue if it's NOT the top rank (#1).
-            // Rank #1 should inherit the card's text style (User request).
-            const rankHtml = rank === 1
-                ? `#${rank}`
-                : `<span style="color: #00ffff;">#${rank}</span>`;
+            if (rank !== 1) {
+                rankValueSpan.style.color = '#00ffff';
+            }
 
-            levelDiv.innerHTML = `
-                ${playerSlotHTML}
-                <div class="challenge-info">
-                    <h3>${level.title}<br><span style="font-size: 0.8em; color: #eee;">Posición en la torre: ${rankHtml}</span></h3>
-                    <p>${level.desc}</p>
-                    ${statsHTML}
-                </div>
-            `;
+            rankLabelSpan.appendChild(rankValueSpan);
+            levelTitle.appendChild(rankLabelSpan);
 
-            towerContainer.appendChild(levelDiv);
+
+            // Description
+            clone.querySelector('.level-desc').textContent = level.desc;
+
+            // 4. Stats
+            const statsContainer = clone.querySelector('.player-stats');
+            if (level.stats) {
+                statsContainer.style.display = 'block';
+
+                // Set widths
+                clone.querySelector('.stat-impetu').style.width = `${level.stats.impetu}%`;
+                clone.querySelector('.stat-resistencia').style.width = `${level.stats.resistencia}%`;
+                clone.querySelector('.stat-velocidad').style.width = `${level.stats.velocidad}%`;
+
+                // Max Levels Text
+                clone.querySelector('.stat-max-levels').textContent = level.stats.maxLevels;
+            }
+
+            towerContainer.appendChild(clone);
         });
     }
+
+    // Helper just in case, though logically I did it inline
+    function props_title(t) { return t; }
 
 
     /* --- Animación de Scroll Infinito Vertical (Torre) --- */
@@ -412,58 +439,116 @@ document.addEventListener('DOMContentLoaded', () => {
             // Actually animationiteration fires at the end of each cycle.
             // We want 1 full cycle.
             if (loopCount >= 1) {
-                showTowerCTA();
+                startBannerSequence();
             }
         });
     }
 
-    function showTowerCTA() {
+    function startBannerSequence() {
         const towerContainer = document.querySelector('.tower-scroll-container');
         if (!towerContainer) return;
 
-        // Replace content with CTA
-        towerContainer.innerHTML = `
-            <div class="tower-cta">
-                <div class="cta-header-row" style="display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
-                    <img src="images/pump_logo.png" class="cta-logo pump">
-                    <h2 style="flex: 1; margin: 0;">¿Quieres ser un Campeón?</h2>
-                    <img src="images/dragon_neon.jpg" class="cta-logo dragon">
-                </div>
-                <p>¡Forma parte de la Torre de los​ Campeones retando a alguno de los challengers!​</p>
-                <div class="cta-contact-box">
-                    <p>Escanea el siguiente código QR o envia un WhatsApp y coordinemos una reta 🤙</p>
-                    <div class="qr-row" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
-                        <div class="cta-decoration">🏆</div>
-                        <div class="qr-code-container">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/525525131883" alt="WhatsApp QR Code" class="cta-qr">
-                        </div>
-                        <div class="cta-decoration">🏆</div>
-                    </div>
-                    <a href="https://wa.me/525525131883" target="_blank" class="cta-phone">5525131883</a>
-                </div>
-            </div>
-        `;
-
-        // Add class to container to remove mask/adjust height
+        // Add class to container to remove mask/adjust height (reused from previous implementation)
         towerContainer.classList.add('cta-mode');
 
-        // Cycle Logic: Wait 6s, then fade out and restart
-        setTimeout(() => {
-            const ctaElement = towerContainer.querySelector('.tower-cta');
-            if (ctaElement) {
-                ctaElement.classList.add('fade-out');
-                // Wait for fade out animation (2s) then restart
-                setTimeout(restartTower, 2000);
+        const banners = [
+            { templateId: 'banner-whatsapp' },
+            { templateId: 'banner-pricing' },
+            { templateId: 'banner-memberships' },
+            { templateId: 'banner-drinks' }
+        ];
+
+        let currentBannerIndex = 0;
+
+        function showBanner(index) {
+            if (index >= banners.length) {
+                // Sequence finished, restart tower
+                const ctaElement = towerContainer.querySelector('.tower-cta');
+                if (ctaElement) {
+                    ctaElement.classList.add('fade-out');
+
+                    // Fade out title too
+                    const title = document.querySelector('.tower-title');
+                    if (title) {
+                        title.classList.remove('fade-in');
+                        title.classList.add('fade-out');
+                    }
+
+                    setTimeout(restartTower, 500); // Wait 0.5s (snappier transition)
+                } else {
+                    restartTower();
+                }
+                return;
             }
-        }, 10000); // Display time: 6 seconds
+
+            // Get template
+            const templateId = banners[index].templateId;
+            const template = document.getElementById(templateId);
+
+            if (template) {
+                // Clear container and clone template
+                towerContainer.innerHTML = '';
+                const clone = template.content.cloneNode(true);
+                towerContainer.appendChild(clone);
+            } else {
+                console.error(`Template ${templateId} not found`);
+                // Fallback to avoid breaking loop
+                towerContainer.innerHTML = `<p>Error: Banner not found</p>`;
+            }
+
+
+            // Update Title Text dynamically
+            const title = document.querySelector('.tower-title');
+            if (title && title.firstChild) {
+                // Remove previous fade classes and ensure visible
+                title.classList.remove('fade-out');
+                title.classList.add('fade-in');
+                title.style.display = 'block';
+
+                // Update text based on index
+                if (index === 0) {
+                    title.firstChild.textContent = "Torre de los Campeones";
+                } else if (index === 1) {
+                    title.firstChild.textContent = "Precios Pump It Up";
+                } else if (index === 2) {
+                    title.firstChild.textContent = "Membresías";
+                } else if (index === 3) {
+                    title.firstChild.textContent = "";
+                }
+            }
+
+            // Wait display time (6s) then Fade out
+            setTimeout(() => {
+                const ctaElement = towerContainer.querySelector('.tower-cta');
+                if (ctaElement) {
+                    ctaElement.classList.add('fade-out');
+
+                    // Synchronize title fade out
+                    const title = document.querySelector('.tower-title');
+                    if (title) {
+                        title.classList.remove('fade-in');
+                        title.classList.add('fade-out');
+                    }
+                }
+
+                // Next banner (wait 2s for fade)
+                setTimeout(() => {
+                    showBanner(index + 1);
+                }, 2000);
+
+            }, 6000); // 6s display time
+        }
+
+        // Start with first banner
+        showBanner(0);
 
         // Hide Logos for cleaner look
         const logos = document.querySelector('.tower-logos');
         if (logos) logos.style.display = 'none';
 
-        // Hide Title text as well to make it cleaner? No user just said logos.
-        // Actually, reducing the title or hiding it might help move things up too. 
-        // User said: "elimina lo iconos... parta que se vea mas arriba"
+        // Ensure Title is visible initially (Banner 0)
+        const title = document.querySelector('.tower-title');
+        if (title) title.style.display = 'block';
     }
 
     function restartTower() {
@@ -479,6 +564,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Restore Logos
         const logos = document.querySelector('.tower-logos');
         if (logos) logos.style.display = 'flex'; // Restore flex display
+
+        // Restore Title
+        const title = document.querySelector('.tower-title');
+        if (title && title.firstChild) {
+            title.classList.remove('fade-out'); // Ensure fade-out is removed
+            title.classList.add('fade-in');     // Animate entrance
+            title.style.display = 'block';
+            title.firstChild.textContent = "Torre de los Campeones";
+        }
 
         // Re-initialize scroll animation
         initTowerScroll();

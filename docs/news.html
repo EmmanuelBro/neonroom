@@ -19,3 +19,224 @@
             </div>
         </div>
 </section>
+
+
+<!-- Tower Level Card Template -->
+<template id="tower-card-template">
+    <div class="tower-level">
+        <!-- Player Slot -->
+        <div class="player-slot">
+            <!-- Image or Placeholder will be set by JS -->
+        </div>
+
+        <!-- Info -->
+        <div class="challenge-info">
+            <h3 class="level-title">
+                <!-- Title Text -->
+                <br>
+                <span class="level-rank-label" style="font-size: 0.8em; color: #eee;">Posición en la torre: <span
+                        class="level-rank"></span></span>
+            </h3>
+            <p class="level-desc"></p>
+
+            <!-- Stats Container -->
+            <div class="player-stats" style="display: none;">
+                <div class="stat-row">
+                    <span class="stat-label">Ímpetu</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill stat-impetu" style="background: #bd00ff; color: #bd00ff;"></div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Resistencia</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill stat-resistencia" style="background: #bd00ff; color: #bd00ff;"></div>
+                    </div>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Velocidad</span>
+                    <div class="stat-bar">
+                        <div class="stat-fill stat-velocidad" style="background: #bd00ff; color: #bd00ff;"></div>
+                    </div>
+                </div>
+                <div class="stat-info">Max Level Promedio: <span class="stat-max-levels"></span></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<!-- Banner Templates for Tower of Champions -->
+
+<!-- Banner 0: WhatsApp -->
+<template id="banner-whatsapp">
+    <div class="tower-cta">
+        <div class="cta-header-row"
+            style="display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+            <img src="images/pump_logo.png" class="cta-logo pump">
+            <h2 style="flex: 1; margin: 0;">¿Quieres ser un Campeón?</h2>
+            <img src="images/dragon_neon.jpg" class="cta-logo dragon">
+        </div>
+        <p>¡Forma parte de la Torre de los​ Campeones retando a alguno de los challengers!​</p>
+        <div class="cta-contact-box">
+            <p>Escanea el siguiente código QR o envia un WhatsApp y coordinemos una reta 🤙</p>
+            <div class="qr-row" style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                <div class="cta-decoration">🏆</div>
+                <div class="qr-code-container">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wa.me/525525131883"
+                        alt="WhatsApp QR Code" class="cta-qr">
+                </div>
+                <div class="cta-decoration">🏆</div>
+            </div>
+            <a href="https://wa.me/525525131883" target="_blank" class="cta-phone">5525131883</a>
+        </div>
+    </div>
+</template>
+
+<!-- Banner 1: Pricing -->
+<template id="banner-pricing">
+    <div class="tower-cta cta-expanded">
+        <div class="cta-header-row"
+            style="display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+            <img src="images/piu_2024_logo.png" class="cta-logo pump" style="border-radius: 10px;">
+            <h2 style="flex: 1; margin: 0;">Pump It Up Phoenix</h2>
+        </div>
+        <div class="cta-contact-box">
+            <p class="cta-highlight">¡Baila la última versión Phoenix!</p>
+            <ul class="cta-list">
+                <li><strong>Crédito:</strong> $6 MXN</li>
+                <li><strong>Renta:</strong> $80 MXN (1 hora / sin limite de personas para rentar)</li>
+            </ul>
+            <p>¡Ven y demuestra de lo que estas hecho! 💃🕺</p>
+        </div>
+    </div>
+</template>
+
+<!-- Banner 2: Memberships -->
+<template id="banner-memberships">
+    <div class="tower-cta cta-expanded">
+        <div class="cta-header-row"
+            style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%;">
+            <img src="images/logo.png" class="cta-logo pump" style="border-radius: 50%;">
+            <h2 style="margin: 0;">Ahorra con membresías 🪪</h2>
+        </div>
+        <div class="cta-contact-box">
+            <div class="mini-cards-container">
+                <!-- Blue -->
+                <div class="mini-card blue">
+                    <div class="mini-ahorro">30%</div>
+                    <div class="mini-icono-usuario"></div>
+                    <div class="mini-info">
+                        <h3 style="color:00ffff">Blue</h3>
+                        <p>$200</p>
+                        <span>3.0 hrs</span>
+                    </div>
+                </div>
+                <!-- Purple -->
+                <div class="mini-card purple">
+                    <div class="mini-ahorro">34%</div>
+                    <div class="mini-icono-usuario"></div>
+                    <div class="mini-info">
+                        <h3 style="color:#d100d1">Purple</h3>
+                        <p>$400</p>
+                        <span>6.5 hrs</span>
+                    </div>
+                </div>
+                <!-- Indigo -->
+                <div class="mini-card indigo">
+                    <div class="mini-ahorro">39%</div>
+                    <div class="mini-icono-usuario"></div>
+                    <div class="mini-info">
+                        <h3 style="color:#4b0082">Indigo</h3>
+                        <p>$600</p>
+                        <span>10 hrs</span>
+                    </div>
+                </div>
+                <!-- Neón -->
+                <div class="mini-card neon">
+                    <div class="mini-ahorro">44%</div>
+                    <div class="mini-icono-usuario"></div>
+                    <div class="mini-info">
+                        <h3 style="color:#ff00ff">Neón</h3>
+                        <p>$900</p>
+                        <span>16 hrs</span>
+                    </div>
+                </div>
+                <!-- Neón Platino -->
+                <div class="mini-card neon-light">
+                    <div class="mini-ahorro">50%</div>
+                    <div class="mini-icono-usuario"></div>
+                    <div class="mini-info">
+                        <h3 style="color:#ffffff; text-shadow: 0 0 5px #ff00ff;">Platino</h3>
+                        <p>$1500</p>
+                        <span style="font-size: 0.8rem">30 hrs + 🎁</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<!-- Banner 3: Drinks (Hidratación) -->
+<template id="banner-drinks">
+    <div class="tower-cta cta-expanded">
+        <div class="cta-header-row"
+            style="display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%;">
+            <img src="images/logo.png" class="cta-logo pump" style="border-radius: 50%;">
+            <h2 style="margin: 0;">Venta de Aguas y Bebidas ⚡</h2>
+        </div>
+        <div class="cta-contact-box">
+            <div class="drink-grid">
+                <!-- Agua 1lt -->
+                <div class="drink-card">
+                    <img src="images/drinks/agua.png" alt="Agua 1lt" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Agua 1lt/1.5lt</h4>
+                        <span class="drink-price">$10/$15</span>
+                    </div>
+                </div>
+                <!-- Volt -->
+                <div class="drink-card">
+                    <img src="images/drinks/volt.png" alt="Volt" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Volt</h4>
+                        <span class="drink-price">$20</span>
+                    </div>
+                </div>
+                <!-- Suerox -->
+                <div class="drink-card">
+                    <img src="images/drinks/suerox.png" alt="Suerox" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Suerox</h4>
+                        <span class="drink-price">$25</span>
+                    </div>
+                </div>
+                <!-- Boing -->
+                <div class="drink-card">
+                    <img src="images/drinks/boing.png" alt="Boing" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Boing</h4>
+                        <span class="drink-price">$17</span>
+                    </div>
+                </div>
+                <!-- Pau Pau -->
+                <div class="drink-card">
+                    <img src="images/drinks/paupau.png" alt="Pau Pau" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Pau Pau</h4>
+                        <span class="drink-price">$8</span>
+                    </div>
+                </div>
+                <!-- Gatorade -->
+                <div class="drink-card">
+                    <img src="images/drinks/gatorade.png" alt="Gatorade" class="drink-img">
+                    <div class="drink-info">
+                        <h4>Gatorade</h4>
+                        <span class="drink-price">$29</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

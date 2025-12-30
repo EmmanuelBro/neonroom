@@ -1158,7 +1158,7 @@ body {
 
 .tower {
     /* .tower ya tiene display: flex y gap: 15px */
-    animation: towerScrollPaused 40s linear infinite;
+    animation: towerScrollPaused 100s linear infinite;
     /* Increased to 80s for very slow scroll */
     will-change: transform;
 }
@@ -1492,6 +1492,10 @@ body {
     /* 2s fade out */
 }
 
+.fade-in {
+    animation: fadeInCTA 2s forwards;
+}
+
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -1533,4 +1537,367 @@ body {
         font-size: 1.2rem !important;
         /* Smaller text to fit in one line if possible */
     }
+}
+
+@media (min-width: 601px) {
+    body.news-page #footer-counter-container {
+        display: none !important;
+    }
+}
+
+.header-separator {
+    display: none;
+}
+
+body.news-page .header-separator {
+    display: inline;
+}
+
+
+.cta-highlight {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff00de;
+    margin-bottom: 10px;
+}
+
+.cta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: inline-block;
+}
+
+.cta-list li {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    padding-bottom: 3px;
+}
+
+.cta-list li:last-child {
+    border-bottom: none;
+}
+
+.cta-list strong {
+    color: #00ffff;
+}
+
+/* Expanded Banner Styles */
+.cta-expanded {
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 50, 0.9));
+    padding: 20px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cta-expanded h2 {
+    font-size: 2.2rem !important;
+    /* Larger Title */
+    margin-bottom: 15px !important;
+    text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+}
+
+.cta-expanded .cta-highlight {
+    font-size: 1.5rem;
+    /* Larger highlight text */
+    margin-bottom: 20px;
+    color: #ff00de;
+    text-shadow: 0 0 10px #ff00de;
+}
+
+.cta-expanded .cta-list li {
+    font-size: 1.3rem;
+    /* Larger list items */
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+    .cta-expanded h2 {
+        font-size: 1.8rem !important;
+    }
+
+    .cta-expanded .cta-highlight {
+        font-size: 1.2rem;
+    }
+
+    .cta-expanded .cta-list li {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mini Cards Styles for Banner */
+.mini-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.mini-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    color: #333;
+    text-align: left;
+    /* Align text left */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    /* Horizontal layout */
+    justify-content: flex-start;
+    /* Items start from left */
+    align-items: center;
+    /* Vertical center */
+    width: 30%;
+    /* Fit 3 in a row */
+    min-width: 120px;
+}
+
+.mini-card h3 {
+    margin: 5px 0 2px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.mini-card p {
+    margin: 0;
+    font-size: 1.0rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.mini-card span {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.mini-ahorro {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 30px;
+    height: 30px;
+    background: #ff0000;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+/* Card Borders/Themes */
+.mini-card.blue {
+    border-bottom: 4px solid #00ffff;
+}
+
+.mini-card.purple {
+    border-bottom: 4px solid #d100d1;
+}
+
+.mini-card.indigo {
+    border-bottom: 4px solid #4b0082;
+}
+
+.mini-card.neon {
+    border-bottom: 4px solid #ff00ff;
+}
+
+.mini-card.neon-light {
+    border-bottom: 4px solid #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+}
+
+/* 5th Card Centering Logic (Handled by flexbox now) */
+/* .mini-card:last-child {
+    grid-column: span 2;
+    width: 60%;
+    justify-self: center;
+} */
+
+.mini-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
+    color: #333;
+    text-align: left;
+    /* Text aligns left */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    /* Horizontal layout */
+    justify-content: center;
+    /* Center the Icon + Text group */
+    align-items: center;
+    width: 30%;
+    min-width: 120px;
+}
+
+/* ... headers ... */
+
+/* Mini User Icon */
+.mini-icono-usuario {
+    width: 15px;
+    height: 15px;
+    background-color: #ccc;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 8px;
+    /* Slightly closer */
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.mini-icono-usuario::after {
+    content: '';
+    width: 26px;
+    height: 12px;
+    background-color: inherit;
+    /* Inherit color from head */
+    border-radius: 12px / 6px;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mini-info {
+    flex: 0 1 auto;
+    /* Don't force full width, allow centering */
+    text-align: center;
+    width: auto;
+}
+
+/* Icon Colors per Card */
+.mini-card.blue .mini-icono-usuario {
+    background-color: #00ffff;
+}
+
+.mini-card.purple .mini-icono-usuario {
+    background-color: #d100d1;
+}
+
+.mini-card.indigo .mini-icono-usuario {
+    background-color: #4b0082;
+}
+
+.mini-card.neon .mini-icono-usuario {
+    background-color: #ff00ff;
+}
+
+.mini-card.neon-light .mini-icono-usuario {
+    background-color: #ffffff;
+    box-shadow: 0 0 5px #ffffff;
+}
+
+@media (max-width: 600px) {
+    .mini-cards-container {
+        gap: 10px;
+    }
+
+    .mini-card {
+        padding: 5px;
+    }
+
+    .mini-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .mini-card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Drinks Banner Grid */
+/* Drinks Banner Grid */
+.drink-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Remove Grid Media Query, handle via card width */
+
+.drink-card {
+    /* Mobile: 3 per row (approx 33%) */
+    flex: 0 0 calc(33.33% - 10px);
+    max-width: calc(33.33% - 10px);
+
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #bd00ff;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(189, 0, 255, 0.3);
+    transition: transform 0.2s ease;
+    min-height: 160px;
+}
+
+/* Desktop: 6 columns */
+@media (min-width: 768px) {
+    .drink-card {
+        flex: 0 0 calc(16.66% - 13px);
+        max-width: calc(16.66% - 13px);
+    }
+}
+
+.drink-card:hover {
+    transform: scale(1.05);
+    background: rgba(189, 0, 255, 0.2);
+    z-index: 10;
+}
+
+.drink-img {
+    width: 100px;
+    /* Increased from 80px */
+    height: 100px;
+    /* Increased from 80px */
+    object-fit: contain;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.drink-info h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    /* Slightly larger text */
+    color: #fff;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.drink-price {
+    font-size: 1rem;
+    /* Larger price */
+    color: #00ffff;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ffff;
+    margin-top: 2px;
 }
