@@ -210,50 +210,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const levelsData = [
         {
-            level: 10,
-            title: "Leyenda Neón",
-            desc: "EN ESPERA DEL CAMPEÓN DE PUMP IT UP EN NEÓN ROOM",
-            photo: "images/liu_kang.jpg", // Placeholder
+            level: 8,
+            title: "Pablo - Hulk",
+            desc: "¡El más traumas del local! Oficialmente ha perdido la cabeza por la maña; se la vive pegado a la máquina hasta que le sale el SS. Poca técnica, puro corazón, mucha frustración... ¡pero ya está en la cima!",
+            photo: "images/fotos/hulk.jpg",
+            stats: {
+                impetu: 75,
+                resistencia: 60,
+                velocidad: 80,
+                maxLevels: "22-23"
+            },
             specialClass: "level-top"
         },
         {
-            level: 9,
-            title: "Pablo - Hulk",
-            desc: "Poca resistencia pero muy bueno con la maña, logra conseguir SS en niveles 20-21 e incluso S en niveles 22.",
-            photo: "images/fotos/hulk.jpg",
-            stats: {
-                impetu: 60,
-                resistencia: 15,
-                velocidad: 80,
-                maxLevels: "22-23"
-            }
-        },
-        {
-            level: 8,
-            title: "Dante",
-            desc: "Buscador de PERFECTS, con gran ímpetu y buena velociadad, realizando todos los cambios posibles en las canciones, logra SSS en niveles 17, 18 y 19.",
-            photo: "images/fotos/dante.jpg",
-            stats: {
-                impetu: 65,
-                resistencia: 40,
-                velocidad: 70,
-                maxLevels: "19-21"
-            }
-        },
-        {
             level: 7,
-            title: "Emmanuel",
-            desc: "Excelente resistencia y energía, logra pasar algunos niveles 20, 21 y 22 con rango S.",
-            photo: "images/fotos/emma.jpg",
-            stats: {
-                impetu: 50,
-                resistencia: 85,
-                velocidad: 60,
-                maxLevels: "20-22"
-            }
-        },
-        {
-            level: 6,
             title: "Fabian - Grande",
             desc: "Buena resistencia y un ímpetu considerable, logra pasar canciones difíciles obteniendo scores de S y SS.",
             photo: "images/fotos/grande.jpg",
@@ -265,7 +235,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
+            level: 6,
+            title: "Emmanuel",
+            desc: "Excelente resistencia y energía, logra pasar algunos niveles 20, 21 y 22 con rango S.",
+            photo: "images/fotos/emma.jpg",
+            stats: {
+                impetu: 50,
+                resistencia: 85,
+                velocidad: 60,
+                maxLevels: "20-22"
+            }
+        },
+        {
             level: 5,
+            title: "Dante",
+            desc: "Buscador de PERFECTS, con gran ímpetu y buena velocidad, realizando todos los cambios posibles en las canciones, logra SSS en niveles 17, 18 y 19.",
+            photo: "images/fotos/dante.jpg",
+            stats: {
+                impetu: 65,
+                resistencia: 40,
+                velocidad: 70,
+                maxLevels: "19-21"
+            }
+        },
+        {
+            level: 4,
             title: "Cecilia - Sexylia",
             desc: "Famosa por pasar niveles 22 con pura maña, un Ímpetu alto y velocidad muy buena.",
             photo: "images/fotos/cecilia.jpg",
@@ -277,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
-            level: 4,
+            level: 3,
             title: "Fernando - Ferna",
             desc: "Resistencia muy buena, logra conseguir niveles 21 con rango S, buena energía.",
             photo: "images/fotos/fernando.jpg",
@@ -289,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
-            level: 3,
+            level: 2,
             title: "Gustavo - El Gus",
             desc: "Equilibrado, supera niveles 17 y 18 con buenos scores y hasta SSS.",
             photo: "images/fotos/gustavo.jpg",
@@ -301,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         {
-            level: 2,
+            level: 1,
             title: "Erick - Gil",
             desc: "Muy buena resistencia, logra conseguir scores S y doble SS en niveles 16 y 17.",
             photo: "images/fotos/gil.jpeg",
@@ -310,18 +304,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 resistencia: 45,
                 velocidad: 40,
                 maxLevels: "16-19"
-            }
-        },
-        {
-            level: 1,
-            title: "Yanet - La Galle",
-            desc: "Siempre se esfuerza al máximo! logrando scores S y SS en niveles intermedios.",
-            photo: "images/fotos/yanet.jpg",
-            stats: {
-                impetu: 70,
-                resistencia: 30,
-                velocidad: 35,
-                maxLevels: "15-18"
             }
         }
     ];
@@ -383,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rankValueSpan.className = 'level-rank';
 
             // Calculate Rank
-            const rank = 11 - level.level;
+            const rank = 9 - level.level;
             rankValueSpan.textContent = `#${rank}`;
 
             if (rank !== 1) {

@@ -1,4 +1,4 @@
-﻿/* Reset y Box-sizing global */
+/* Reset y Box-sizing global */
 * {
     margin: 0;
     padding: 0;
@@ -1128,8 +1128,8 @@ body {
 
 /* --- Auto-Scroll Tower --- */
 .tower-scroll-container {
-    height: 260px;
-    /* Show only 1 card (220px + gap) */
+    height: 740px;
+    /* Show 3 cards approx */
     padding-top: 30px;
     /* Push content down to avoid top mask fade */
     box-sizing: border-box;
@@ -1149,7 +1149,7 @@ body {
     -webkit-mask-image: none !important;
     height: auto !important;
     /* Allow card to expand */
-    min-height: 260px;
+    min-height: 740px;
     /* Keep minimum height */
     overflow: visible !important;
     padding-top: 10px;
@@ -1171,23 +1171,23 @@ body {
 
 @keyframes towerScrollMobile {
     0% {
-        transform: translateY(-4000px);
-        /* Adjusted for taller mobile cards (10 * 400 approx) */
+        transform: translateY(0px);
         opacity: 0;
     }
 
     2% {
         opacity: 1;
-        transform: translateY(-4000px);
+        transform: translateY(0px);
     }
 
     5% {
-        transform: translateY(-4000px);
+        transform: translateY(0px);
         opacity: 1;
     }
 
     80% {
-        transform: translateY(0px);
+        transform: translateY(-3520px);
+        /* Adjusted for taller mobile cards (8 * 440 approx) */
         opacity: 1;
     }
 
@@ -1196,7 +1196,7 @@ body {
     }
 
     100% {
-        transform: translateY(0px);
+        transform: translateY(-3520px);
         opacity: 0;
     }
 }
@@ -1205,31 +1205,31 @@ body {
 /*Se deben acomodar los transform cada ves que se agreguen mas tarjetas*/
 @keyframes towerScrollPaused {
     0% {
-        transform: translateY(-2150px);
-        /* Adjusted for 10 levels: -710px (base) - 1200px (5 new levels * 240px) */
+        transform: translateY(0px);
         opacity: 0;
     }
 
     2% {
         opacity: 1;
-        transform: translateY(-2150px);
+        transform: translateY(0px);
         /* Hold position (fade in) */
     }
 
     5% {
-        transform: translateY(-2150px);
+        transform: translateY(0px);
         /* Hold position for ~3s (5% of 60s) */
         opacity: 1;
     }
 
     /* Smooth Scroll until the very end */
     90% {
-        transform: translateY(0px);
+        transform: translateY(-1920px);
+        /* 8 items * 240px */
         opacity: 1;
     }
 
     100% {
-        transform: translateY(0px);
+        transform: translateY(-1920px);
         opacity: 0;
     }
 }
@@ -1252,8 +1252,8 @@ body {
 /* Responsividad para la torre - MOVED TO END TO OVERRIDE GLOBAL STYLES */
 @media (max-width: 600px) {
     .tower-scroll-container {
-        height: 450px;
-        /* Mobile card is 400px + gap */
+        height: 850px;
+        /* Mobile card is taller, show ~2 cards */
     }
 
     .tower-level {
