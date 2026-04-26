@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 8,
             title: "Pablo - Hulk",
-            desc: "¡El más traumas del local! Oficialmente ha perdido la cabeza por la maña; se la vive pegado a la máquina hasta que le sale el SS. Poca técnica, puro corazón, mucha frustración... ¡pero ya está en la cima!",
+            desc: "¡El más traumas del local! Oficialmente ha perdido la cabeza por la maña; se la vive pegado a la máquina hasta que le sale SSS. Poca técnica, puro corazón, mucha frustración... ¡pero ya está en la cima!",
             photo: "images/fotos/hulk.jpg",
             stats: {
                 impetu: 75,
