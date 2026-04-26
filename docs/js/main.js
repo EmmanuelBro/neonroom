@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             level: 1,
             title: "Erick - Gil",
-            desc: "Muy buena resistencia, logra conseguir scores S y doble SS en niveles 16 y 17.",
+            desc: "Muy buena resistencia, logra conseguir scores S, SS y SSS en niveles 16 y 17.",
             photo: "images/fotos/gil.jpeg",
             stats: {
                 impetu: 60,
